@@ -1,6 +1,9 @@
 package com.jiahanglee.babyship.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -10,7 +13,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @description //TODO
  */
 @RestController
-public class HelloWorld {
+public class HelloController {
+
+    @Autowired
+private GirlProperties girlProperties;
    /**
     * @author jiahanglee
     * @description //TODO
@@ -18,12 +24,9 @@ public class HelloWorld {
     * @Param [sddd]
     * @return java.lang.String
     **/
-    @RequestMapping("/hello")
-    public static String test(String sddd){
-        return "hello world!!!5555ere55erewr4545454ddfdffdfdfdytytyty";
-    }
-    public static String test2(String jiji){
-        return "zhehsiwo";
+    @GetMapping(value = "/hello")
+    public  String say() {
+        return girlProperties.getCupSize();
     }
 
 }

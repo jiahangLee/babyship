@@ -7,3 +7,5 @@ baochunkuajing
 - ps -ef|grep java
 - application.yml文件替代proprietary文件
 * 热加载、热部署、热启动
+
+* https://gitee.com/xiangze/demo //相关教程

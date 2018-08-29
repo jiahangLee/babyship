@@ -1,3 +1,3 @@
 server:
   port: 8002
-
+web.upload-path: C:\Users\Administrator\Desktop

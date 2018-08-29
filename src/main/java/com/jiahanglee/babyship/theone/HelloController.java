@@ -1,15 +1,16 @@
 package com.jiahanglee.babyship.theone;
 
+import com.jiahanglee.babyship.util.FileUploadUtil;
 import org.hibernate.validator.constraints.ConstraintComposition;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.List;
+
+import static org.springframework.data.repository.init.ResourceReader.Type.JSON;
 
 /**
  * @author jiahanglee
@@ -35,11 +36,18 @@ public class HelloController {
         return girlProperties.getCupSize();
     }
 
+    @CrossOrigin
     @PostMapping(value = "/upload")
-    public String save(
-                       @RequestParam("name") String  fileList
-    ) {
-        System.out.print(fileList);
-        return "ok";
+    public String save(MultipartFile file) {
+        System.out.print( file.getName());
+        String msg = "";
+        // 要上传的目标文件存放路径
+        String localPath = "C:/Users/Administrator/Desktop/upload";
+        if(FileUploadUtil.upload(file,localPath,file.getOriginalFilename())){
+            msg = "上传成功";
+        }else{
+            msg = "上传失败";
+        }
+        return "okok";
     }
 }

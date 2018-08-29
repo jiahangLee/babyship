@@ -1,6 +1,4 @@
-package com.jiahanglee.babyship.controller;
-
-import org.springframework.stereotype.Component;
+package com.jiahanglee.babyship.theone;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

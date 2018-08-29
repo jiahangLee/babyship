@@ -1,4 +1,4 @@
-package com.jiahanglee.babyship.controller;
+package com.jiahanglee.babyship.theone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

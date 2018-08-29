@@ -1,4 +1,4 @@
-package com.jiahanglee.babyship.controller;
+package com.jiahanglee.babyship.theone;
 
 
 import org.springframework.boot.context.properties.ConfigurationProperties;

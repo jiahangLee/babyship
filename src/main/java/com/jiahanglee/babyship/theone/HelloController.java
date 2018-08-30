@@ -48,6 +48,7 @@ public class HelloController {
         }else{
             msg = "上传失败";
         }
+        System.out.println(msg);
         return "okok";
     }
 }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiahanglee.babyship.dao.TeacherDao" >
+	<sql id="BASE_TABLE">
+		teacher
+	</sql>
+
+	<sql id="BASE_COLUMN">
+		id,name,url,description
+	</sql>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.jiahanglee.babyship.entity.Teacher">
+		INSERT INTO
+		<include refid="BASE_TABLE"/>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			name,url,description
+			<!--<if test="name != null">-->
+				<!--phone,-->
+			<!--</if>-->
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			#{name, jdbcType=VARCHAR},#{url, jdbcType=VARCHAR},#{description, jdbcType=VARCHAR}
+			<!--<if test="phone != null">-->
+				<!--#{phone, jdbcType=VARCHAR},-->
+			<!--</if>-->
+		</trim>
+	</insert>
+
+	<select id="selectTeachers" resultType="com.jiahanglee.babyship.entity.Teacher">
+		SELECT
+		<include refid="BASE_COLUMN"/>
+		FROM
+		<include refid="BASE_TABLE"/>
+	</select>
+
+</mapper>

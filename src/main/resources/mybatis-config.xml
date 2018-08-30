@@ -5,6 +5,11 @@
 <configuration>
     <!-- 配置全局属性 -->
     <settings>
+        <!-- 全局地开启或关闭配置文件中的所有映射器已经配置的任何缓存。 -->
+        <setting name="cacheEnabled" value="true"/>
+        <!-- 设置超时时间，它决定驱动等待数据库响应的秒数。 -->
+        <setting name="defaultStatementTimeout" value="3000"/>
+
         <!-- 使用jdbc的getGeneratedKeys获取数据库自增主键值 -->
         <setting name="useGeneratedKeys" value="true" />
 

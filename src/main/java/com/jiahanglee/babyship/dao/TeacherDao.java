@@ -1,46 +1,20 @@
 package com.jiahanglee.babyship.dao;
 
 import com.jiahanglee.babyship.entity.Teacher;
-
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 
     public interface TeacherDao {
-        /**
-         * 列出区域列表
-         *
-         * @return areaList
-         */
-        List<Teacher> queryArea();
 
-        /**
-         * 根据Id列出具体区域
-         *
-         * @return area
-         */
-        Teacher queryAreaById(int areaId);
+        String TABLE_NAME = "user";
+        String INSERT_FIELDS = "id,name";
+        String SELECT_FIELDS = "ID,NAME,url";
 
-        /**
-         * 插入区域信息
-         *
-         * @param area
-         * @return
-         */
-        int insertArea(Teacher area);
+        int insert(Teacher teacher);
 
-        /**
-         * 更新区域信息
-         *
-         * @param area
-         * @return
-         */
-        int updateArea(Teacher area);
+        List<Teacher> selectTeachers();
 
-        /**
-         * 删除区域信息
-         *
-         * @param areaId
-         * @return
-         */
-        int deleteArea(int areaId);
+
     }

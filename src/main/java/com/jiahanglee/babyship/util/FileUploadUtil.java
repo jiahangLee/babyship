@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class FileUploadUtil {
-    public static Boolean upload(MultipartFile file,String path,String fileName){
+    public static String upload(MultipartFile file,String path,String fileName){
         String realPath = path + "/" + FileNameUtils.getFileName(fileName);
 
         File dest = new File(realPath);
@@ -17,10 +17,10 @@ public class FileUploadUtil {
 
         try {
             file.transferTo(dest);
-            return true;
+            return realPath;
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
+            return "false";
         }
     }
 }

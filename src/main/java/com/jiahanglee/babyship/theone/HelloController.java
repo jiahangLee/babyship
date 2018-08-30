@@ -43,12 +43,9 @@ public class HelloController {
         String msg = "";
         // 要上传的目标文件存放路径
         String localPath = "C:/Users/Administrator/Desktop/upload";
-        if(FileUploadUtil.upload(file,localPath,file.getOriginalFilename())){
-            msg = "上传成功";
-        }else{
-            msg = "上传失败";
-        }
+        msg= FileUploadUtil.upload(file,localPath,file.getOriginalFilename());
+
         System.out.println(msg);
-        return "okok";
+        return msg;
     }
 }

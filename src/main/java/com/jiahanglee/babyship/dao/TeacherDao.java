@@ -1,8 +1,6 @@
 package com.jiahanglee.babyship.dao;
 
 import com.jiahanglee.babyship.entity.Teacher;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 
@@ -16,5 +14,8 @@ import java.util.List;
 
         List<Teacher> selectTeachers();
 
+        int delete(int id);
+
+        void update(Teacher teacher);
 
     }

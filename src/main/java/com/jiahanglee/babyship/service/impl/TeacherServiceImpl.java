@@ -29,4 +29,13 @@ public class TeacherServiceImpl implements TeacherService{
         return result;
     }
 
+    @Override
+    public int deleteTeacher(Integer id) {
+        return teacherDao.delete(id);
+    }
+
+    @Override
+    public void update(Teacher teacher) {
+         teacherDao.update(teacher);
+    }
 }

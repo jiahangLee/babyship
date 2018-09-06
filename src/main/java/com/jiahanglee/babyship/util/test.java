@@ -42,10 +42,20 @@ public class test {
 
         try {
             jsonObj = new JSONObject(json);
+
             Map<String, String> ingredients = new HashMap<String, String>();
-            ingredients.put("data","http://localhost:8002/babyship/download?url=");
-            jsonObj.put("hello", ingredients);
+
+            Map<String,Integer> ingredients2 = new HashMap<String, Integer>();
+            ingredients2.put("age",25);
+
+            JSONObject ingredients1 = new JSONObject(ingredients);
+
+            ingredients1.put("data",new JSONObject( ingredients2));
+            jsonObj.put("hello1", ingredients);
+            jsonObj.put("hello2", ingredients1);
+
             System.out.println(jsonObj);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }

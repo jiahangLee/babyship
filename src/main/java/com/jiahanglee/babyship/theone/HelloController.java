@@ -54,41 +54,42 @@ public class HelloController {
         return msg;
     }
 
-    @GetMapping(value = "/uploadplus")
-    public JSONObject save2(MultipartFile file) throws JSONException {
+    @PostMapping(value = "/uploadplus")
+    public String save2(MultipartFile file) throws JSONException {
+
+        String json = "{}";
+        JSONObject jsonObj = new JSONObject(json);
+        Map<String, String> ingredients = new HashMap<String, String>();
+//
+//
+        System.out.print( file.getName());
+        String msg = "";
+        // 要上传的目标文件存放路径
+        String localPath = "C:/Users/Administrator/Desktop/uploadplus";
+        msg= FileUploadUtil.upload(file,localPath,file.getOriginalFilename());
+
+        ingredients.put("url","http://localhost:8002/babyship/download?url="+msg );
+        jsonObj.put("data",new JSONObject(ingredients));
+        System.out.println(msg);
+        return jsonObj.toString().replaceAll("\\\\","");
 
 //        String json = "{}";
-//        JSONObject jsonObj = new JSONObject(json);
-//        Map<String, String> ingredients = new HashMap<String, String>();
+//        JSONObject jsonObj;
+//        JSONObject jsonObj2;
+//        jsonObj2 = new JSONObject(json);
 //
 //
-//        System.out.print( file.getName());
-//        String msg = "";
-//        // 要上传的目标文件存放路径
-//        String localPath = "C:/Users/Administrator/Desktop/uploadplus";
-//        msg= FileUploadUtil.upload(file,localPath,file.getOriginalFilename());
-//
-//        ingredients.put("data","http://localhost:8002/babyship/download?url="+msg );
-//        System.out.println(msg);
-//        return jsonObj;
-
-        String json = "{'name':'lijiahang'}";
-        JSONObject jsonObj;
-        JSONObject jsonObj2;
-        jsonObj2 = new JSONObject(json);
-
-
-        try {
-            jsonObj = new JSONObject(json);
-            Map<String, String> ingredients = new HashMap<String, String>();
-            ingredients.put("data", "http://localhost:8002/babyship/download?url=");
-            jsonObj.put("hello", ingredients);
-            System.out.println(jsonObj);
-            return jsonObj;
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-            return jsonObj2;
+//        try {
+//            jsonObj = new JSONObject(json);
+//            Map<String, String> ingredients = new HashMap<String, String>();
+//            ingredients.put("data", "http://localhost:8002/babyship/download?url=");
+//            jsonObj.put("hello", new JSONObject(ingredients));
+//            System.out.println(jsonObj.toString());
+//            return jsonObj.toString();
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//            return jsonObj2.toString();
 
     }
 }

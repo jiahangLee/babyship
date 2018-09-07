@@ -68,7 +68,7 @@ public class HelloController {
         String localPath = "C:/Users/Administrator/Desktop/uploadplus";
         msg= FileUploadUtil.upload(file,localPath,file.getOriginalFilename());
 
-        ingredients.put("url","http://localhost:8002/babyship/download?url="+msg );
+        ingredients.put("link","http://localhost:8002/babyship/download?url="+msg );
         jsonObj.put("data",new JSONObject(ingredients));
         System.out.println(msg);
         return jsonObj.toString().replaceAll("\\\\","");

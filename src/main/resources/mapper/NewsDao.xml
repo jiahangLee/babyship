@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiahanglee.babyship.dao.NewsDao" >
+	<sql id="BASE_TABLE">
+		news
+	</sql>
+
+	<sql id="BASE_COLUMN">
+		id,name,url,description,editor
+	</sql>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.jiahanglee.babyship.entity.News">
+		INSERT INTO
+		<include refid="BASE_TABLE"/>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			name,url,description,editor
+			<!--<if test="name != null">-->
+				<!--phone,-->
+			<!--</if>-->
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			#{name, jdbcType=VARCHAR},#{url, jdbcType=VARCHAR},#{description, jdbcType=VARCHAR},#{editor, jdbcType=VARCHAR}
+			<!--<if test="phone != null">-->
+				<!--#{phone, jdbcType=VARCHAR},-->
+			<!--</if>-->
+		</trim>
+	</insert>
+
+	<select id="selectTeachers" resultType="com.jiahanglee.babyship.entity.News">
+		SELECT
+		<include refid="BASE_COLUMN"/>
+		FROM
+		<include refid="BASE_TABLE"/>
+		ORDER BY id
+	</select>
+
+	<delete id="delete" parameterType="Integer">
+		delete From news WHERE id = #{id}
+	</delete>
+
+	<update id = "update"   parameterType = "com.jiahanglee.babyship.entity.News">
+		update news
+		<set>
+			<if test="name!=null">
+				name = #{name},
+			</if>
+			<if test="description!=null">
+				description = #{description},
+			</if>
+			<if test="url!=null">
+				url = #{url}
+			</if>
+			<if test="editor!=null">
+				editor = #{editor}
+			</if>
+		</set>
+        WHERE id = #{id}
+	</update>
+</mapper>

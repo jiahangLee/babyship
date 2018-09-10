@@ -48,7 +48,7 @@
 				description = #{description},
 			</if>
 			<if test="url!=null">
-				url = #{url}
+				url = #{url},
 			</if>
 			<if test="editor!=null">
 				editor = #{editor}

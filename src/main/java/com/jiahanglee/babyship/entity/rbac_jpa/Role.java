@@ -1,8 +1,8 @@
 package com.jiahanglee.babyship.entity.rbac_jpa;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * code is far away from bug with the animal protecting
@@ -36,7 +36,6 @@ public class Role {
     private int id;
     private String name;
     private String description;
-
     public int getId() {
         return id;
     }

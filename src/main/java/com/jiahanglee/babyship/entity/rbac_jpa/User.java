@@ -37,8 +37,8 @@ public class User {
     private String name;
     private String description;
 
-    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-            @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     @JoinColumn(name = "id")
     private Set<Role> role = new HashSet<>();

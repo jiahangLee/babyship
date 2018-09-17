@@ -6,20 +6,20 @@
 	</sql>
 
 	<sql id="BASE_COLUMN">
-		id,name,url,description
+		id,name,url,description,create_time,update_time
 	</sql>
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.jiahanglee.babyship.entity.Teacher">
 		INSERT INTO
 		<include refid="BASE_TABLE"/>
 		<trim prefix="(" suffix=")" suffixOverrides=",">
-			name,url,description
+			name,url,description,create_time,update_time
 			<!--<if test="name != null">-->
 				<!--phone,-->
 			<!--</if>-->
 		</trim>
 		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
-			#{name, jdbcType=VARCHAR},#{url, jdbcType=VARCHAR},#{description, jdbcType=VARCHAR}
+			#{name, jdbcType=VARCHAR},#{url, jdbcType=VARCHAR},#{description, jdbcType=VARCHAR},CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP
 			<!--<if test="phone != null">-->
 				<!--#{phone, jdbcType=VARCHAR},-->
 			<!--</if>-->
@@ -48,8 +48,9 @@
 				description = #{description},
 			</if>
 			<if test="url!=null">
-				url = #{url}
+				url = #{url},
 			</if>
+			update_time = CURRENT_TIMESTAMP
 		</set>
         WHERE id = #{id}
 	</update>

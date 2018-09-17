@@ -1,8 +1,14 @@
 package com.jiahanglee.babyship.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.*;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * @author jiahanglee
@@ -11,13 +17,18 @@ import javax.persistence.Id;
  * @description //TODO
  */
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Teacher {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String url;
     private String description;
+    @CreatedDate
+    private Timestamp createTime;
+    @LastModifiedDate
+    private Timestamp updateTime;
 
     public Integer getId() {
         return id;
@@ -51,6 +62,16 @@ public class Teacher {
         this.description = description;
     }
 
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
+
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
+    }
+
+
     @Override
     public String toString() {
         return "Teacher{" +
@@ -58,6 +79,8 @@ public class Teacher {
                 ", name='" + name + '\'' +
                 ", url='" + url + '\'' +
                 ", description='" + description + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
                 '}';
     }
 }

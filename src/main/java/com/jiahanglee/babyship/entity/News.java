@@ -1,8 +1,10 @@
 package com.jiahanglee.babyship.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import javax.persistence.*;
+import java.sql.Timestamp;
 
 /**
  * code is far away from bug with the animal protecting
@@ -32,12 +34,50 @@ import javax.persistence.Id;
 @Entity
 public class News {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
     private String name;
     private String url;
     private String description;
     private String editor;
+    @CreationTimestamp
+    @Column(name = "create_time",columnDefinition="DATETIME COMMENT '添加时间'")
+    private Timestamp createTime;
+    @UpdateTimestamp
+    @Column(name = "update_time",columnDefinition="DATETIME COMMENT '最后更新时间'")
+    private Timestamp updateTime;
+
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
+
+    public Timestamp getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Timestamp updateTime) {
+        this.updateTime = updateTime;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "News{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                ", description='" + description + '\'' +
+                ", editor='" + editor + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                '}';
+    }
+
 
     public Integer getId() {
         return id;
@@ -79,14 +119,4 @@ public class News {
         this.editor = editor;
     }
 
-    @Override
-    public String toString() {
-        return "News{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", url='" + url + '\'' +
-                ", description='" + description + '\'' +
-                ", editor='" + editor + '\'' +
-                '}';
-    }
 }

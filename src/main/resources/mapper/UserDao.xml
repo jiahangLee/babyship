@@ -6,7 +6,7 @@
     </sql>
 
     <sql id="BASE_COLUMN">
-        id,name,description,major
+        id,name,description,major,password
     </sql>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.jiahanglee.babyship.entity.rbac_jpa.User">

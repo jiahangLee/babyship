@@ -61,10 +61,10 @@ public class UserController {
         return userService.findAllUser(pageNum,pageSize);
     }
     @GetMapping(value = "/login")
-    public User login(
+    public boolean login(
             @RequestParam(name = "id",required = false)Integer id,
             @RequestParam(name = "password",required = false)String password
     ){
-        return userService.selectUser(id);
+        return userService.selectUser(id).getPassword().equals(password);
     }
 }

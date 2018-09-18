@@ -39,6 +39,8 @@ public class User {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     private String name;
+    private String password;
+    private String major;
     private String description;
     @CreationTimestamp
     @Column(name = "create_time",columnDefinition="DATETIME COMMENT '添加时间'")
@@ -47,23 +49,28 @@ public class User {
     @Column(name = "update_time",columnDefinition="DATETIME COMMENT '最后更新时间'")
     private Timestamp updateTime;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", createTime=" + createTime +
-                ", updateTime=" + updateTime +
-                ", role=" + role +
-                '}';
-    }
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     @JoinColumn(name = "id")
     private Set<Role> role = new HashSet<>();
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public Timestamp getCreateTime() {
         return createTime;
@@ -112,5 +119,19 @@ public class User {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", major='" + major + '\'' +
+                ", description='" + description + '\'' +
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", role=" + role +
+                '}';
     }
 }

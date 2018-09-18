@@ -1,4 +1,4 @@
-package com.jiahanglee.babyship.controller;
+package com.jiahanglee.babyship.controller.web;
 
 import com.github.pagehelper.PageInfo;
 import com.jiahanglee.babyship.entity.News;

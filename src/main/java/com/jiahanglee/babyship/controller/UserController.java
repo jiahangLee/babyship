@@ -4,8 +4,13 @@ import com.jiahanglee.babyship.entity.rbac_jpa.User;
 import com.jiahanglee.babyship.service.UserService;
 import com.jiahanglee.babyship.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -40,17 +45,20 @@ public class UserController {
     private UserService userService;
 
     @PostMapping(value = "/addUser")
-    public int addUser(User user){
+    public int addUser(User user) {
         return userService.addUser(user);
     }
+
     @GetMapping(value = "/deleteUser")
-    public int deleteUser(@RequestParam(name = "id",required = false)Integer id){
+    public int deleteUser(@RequestParam(name = "id", required = false) Integer id) {
         return userService.deleteUser(id);
     }
+
     @PostMapping(value = "/updateUser")
-    public void updateUser(User user){
-         userService.update(user);
+    public void updateUser(User user) {
+        userService.update(user);
     }
+
     @GetMapping(value = "/allUser")
     public Object allUser(
             @RequestParam(name = "pageNum", required = false, defaultValue = "1")
@@ -58,13 +66,22 @@ public class UserController {
             @RequestParam(name = "pageSize", required = false, defaultValue = "10")
                     int pageSize
     ) {
-        return userService.findAllUser(pageNum,pageSize);
+        return userService.findAllUser(pageNum, pageSize);
     }
+
     @GetMapping(value = "/login")
-    public boolean login(
-            @RequestParam(name = "id",required = false)Integer id,
-            @RequestParam(name = "password",required = false)String password
-    ){
-        return userService.selectUser(id).getPassword().equals(password);
+    public boolean login(HttpServletRequest httpServletRequest,HttpServletResponse httpServletResponse,
+            @RequestParam(name = "id", required = false) Integer id,
+            @RequestParam(name = "password", required = false) String password
+    ) {
+        if (userService.selectUser(id) == null )
+            return false;
+        else if(userService.selectUser(id).getPassword().equals(password)) {
+            Cookie cookie = new Cookie("username", "username-----"+id);
+            cookie.setPath(httpServletRequest.getContextPath());
+            cookie.setMaxAge(80000);
+            httpServletResponse.addCookie(cookie);
+            return userService.selectUser(id).getPassword().equals(password);
+        }else return false;
     }
 }

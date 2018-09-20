@@ -14,4 +14,6 @@ public interface UserService {
   void update(User user);
 
   User selectUser(Integer id);
+
+  int selectRoleById(Integer id);
 }

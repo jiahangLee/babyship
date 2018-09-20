@@ -75,13 +75,17 @@ public class UserController {
             @RequestParam(name = "password", required = false) String password
     ) {
         if (userService.selectUser(id) == null )
-            return false;
+        {return false;}
         else if(userService.selectUser(id).getPassword().equals(password)) {
             Cookie cookie = new Cookie("username", "username-----"+id);
             cookie.setPath(httpServletRequest.getContextPath());
             cookie.setMaxAge(80000);
             httpServletResponse.addCookie(cookie);
             return userService.selectUser(id).getPassword().equals(password);
-        }else return false;
+        }else {return false;}
+    }
+    @GetMapping(value = "/selectRoleById")
+    public int selectRoleById(@RequestParam(value = "id",required = false)Integer id){
+        return userService.selectRoleById(id);
     }
 }

@@ -40,6 +40,12 @@
         <include refid="BASE_TABLE"/>
         WHERE id = #{id}
     </select>
+    <select id="selectRoleById" parameterType="Integer" resultType="Integer">
+        SELECT
+        role_id
+        From user_role
+        where id = #{id}
+    </select>
     <delete id="delete" parameterType="Integer">
         delete From user WHERE id = #{id}
     </delete>

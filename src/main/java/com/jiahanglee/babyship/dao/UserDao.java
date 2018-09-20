@@ -22,4 +22,6 @@ public interface UserDao {
     List<User> selectUser();
 
     User selectById(Integer id);
+
+    int selectRoleById(Integer id);
 }

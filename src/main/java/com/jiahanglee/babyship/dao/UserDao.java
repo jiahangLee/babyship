@@ -23,5 +23,5 @@ public interface UserDao {
 
     User selectById(Integer id);
 
-    int selectRoleById(Integer id);
+    Integer selectRoleById(Integer id);
 }

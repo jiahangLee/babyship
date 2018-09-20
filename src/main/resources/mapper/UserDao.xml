@@ -44,7 +44,7 @@
         SELECT
         role_id
         From user_role
-        where id = #{id}
+        where user_id = #{id}
     </select>
     <delete id="delete" parameterType="Integer">
         delete From user WHERE id = #{id}

@@ -1,10 +1,14 @@
 package com.jiahanglee.babyship.entity.rbac_jpa;
 
 
+import com.jiahanglee.babyship.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Created by echisan on 2018/6/23
@@ -12,13 +16,16 @@ import java.util.Collection;
 public class JwtUser implements UserDetails {
 
     private Integer id;
-    private String username;
+    private String name;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
 
+    @Autowired
+    private UserService userService;
     public JwtUser(String phone,String openId) {
-        username = phone;
+        name = phone;
         password = openId;
+        authorities = Collections.singleton(new SimpleGrantedAuthority("1"));
     }
 
         @Override
@@ -33,7 +40,7 @@ public class JwtUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return name;
     }
 
     @Override
@@ -60,7 +67,7 @@ public class JwtUser implements UserDetails {
     public String toString() {
         return "JwtUser{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", authorities=" + authorities +
                 '}';

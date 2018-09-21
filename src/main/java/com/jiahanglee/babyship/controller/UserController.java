@@ -88,4 +88,19 @@ public class UserController {
     public int selectRoleById(@RequestParam(value = "id",required = false)Integer id){
         return userService.selectRoleById(id);
     }
+
+    @GetMapping(value = "/selectByName")
+    public Object selectByName(@RequestParam(value = "name",required = false)String name){
+        return userService.selectByUser(name);
+    }
+
+    @GetMapping(value = "/selectRoleByName")
+    public Integer selectRoleByName(@RequestParam(value = "name",required = false)String name){
+        return userService.selectRoleByName(name);
+    }
+
+    @GetMapping(value = "/selectUser")
+    public Object selectByName(@RequestParam(value = "id",required = false)Integer id){
+        return userService.selectUser(id);
+    }
 }

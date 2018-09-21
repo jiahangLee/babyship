@@ -42,10 +42,10 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
             System.out.println("尝试登录");
 
             //手机号
-            String phone = request.getParameter("phone");
+            String phone = request.getParameter("name");
 
             //用户openId
-            String openId = request.getParameter("openId");
+            String openId = request.getParameter("password");
 
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(

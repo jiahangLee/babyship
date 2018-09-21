@@ -38,7 +38,9 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
+    @Column(unique = true)
     private String name;
+    private String cnName;
     private String password;
     private String major;
     private String description;
@@ -55,6 +57,14 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     @JoinColumn(name = "id")
     private Set<Role> role = new HashSet<>();
+
+    public String getCnName() {
+        return cnName;
+    }
+
+    public void setCnName(String cnName) {
+        this.cnName = cnName;
+    }
 
     public String getMajor() {
         return major;
@@ -88,13 +98,6 @@ public class User {
         this.updateTime = updateTime;
     }
 
-    public Set<Role> getRole() {
-        return role;
-    }
-
-    public void setRole(Set<Role> role) {
-        this.role = role;
-    }
 
     public int getId() {
 
@@ -126,6 +129,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", cnName='" + cnName + '\'' +
                 ", password='" + password + '\'' +
                 ", major='" + major + '\'' +
                 ", description='" + description + '\'' +

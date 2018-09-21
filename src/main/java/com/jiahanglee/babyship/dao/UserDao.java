@@ -24,4 +24,8 @@ public interface UserDao {
     User selectById(Integer id);
 
     Integer selectRoleById(Integer id);
+
+    User selectByName(String name);
+
+    Integer selectRoleByName(String name);
 }

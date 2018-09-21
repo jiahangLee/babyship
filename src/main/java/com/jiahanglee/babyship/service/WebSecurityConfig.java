@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers("/tasks/**").authenticated()
+                .antMatchers("/hello").authenticated()
                 // 其他都放行了
                 .anyRequest().permitAll()
                 .and()

@@ -48,4 +48,14 @@ public class UserServiceImpl implements UserService{
     public int selectRoleById(Integer id) {
         return userDao.selectRoleById(id);
     }
+
+    @Override
+    public User selectByUser(String name) {
+        return userDao.selectByName(name);
+    }
+
+    @Override
+    public Integer selectRoleByName(String name) {
+        return userDao.selectRoleByName(name);
+    }
 }

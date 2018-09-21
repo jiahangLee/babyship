@@ -16,4 +16,8 @@ public interface UserService {
   User selectUser(Integer id);
 
   int selectRoleById(Integer id);
+
+  User selectByUser(String user);
+
+  Integer selectRoleByName(String name);
 }

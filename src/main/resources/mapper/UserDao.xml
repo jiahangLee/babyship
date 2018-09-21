@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.jiahanglee.babyship.dao.UserDao" >
+<mapper namespace="com.jiahanglee.babyship.dao.UserDao">
     <sql id="BASE_TABLE">
         user
     </sql>
@@ -9,7 +9,8 @@
         id,name,description,major,password
     </sql>
 
-    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.jiahanglee.babyship.entity.rbac_jpa.User">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.jiahanglee.babyship.entity.rbac_jpa.User">
         INSERT INTO
         <include refid="BASE_TABLE"/>
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -19,7 +20,8 @@
             <!--</if>-->
         </trim>
         <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
-            #{name, jdbcType=VARCHAR},#{description, jdbcType=VARCHAR},#{major, jdbcType=VARCHAR},"123456",CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP
+            #{name, jdbcType=VARCHAR},#{description, jdbcType=VARCHAR},#{major, jdbcType=VARCHAR},"123456",CURRENT_TIMESTAMP
+            ,CURRENT_TIMESTAMP
             <!--<if test="phone != null">-->
             <!--#{phone, jdbcType=VARCHAR},-->
             <!--</if>-->
@@ -33,7 +35,7 @@
         <include refid="BASE_TABLE"/>
         ORDER BY id
     </select>
-    <select id="selectById" parameterType="Integer" resultType="com.jiahanglee.babyship.entity.rbac_jpa.User" >
+    <select id="selectById" parameterType="Integer" resultType="com.jiahanglee.babyship.entity.rbac_jpa.User">
         SELECT
         <include refid="BASE_COLUMN"/>
         FROM
@@ -46,11 +48,23 @@
         From user_role
         where user_id = #{id}
     </select>
+    <select id="selectRoleByName" parameterType="String" resultType="Integer">
+        SELECT
+        role_id
+        From user_role,user
+        where name = #{name} and user_id = id
+    </select>
+    <select id="selectByName" parameterType="String" resultType="com.jiahanglee.babyship.entity.rbac_jpa.User">
+        SELECT
+        <include refid="BASE_COLUMN"/>
+        From user
+        where name = #{name}
+    </select>
     <delete id="delete" parameterType="Integer">
         delete From user WHERE id = #{id}
     </delete>
 
-    <update id = "update"   parameterType = "com.jiahanglee.babyship.entity.rbac_jpa.User">
+    <update id="update" parameterType="com.jiahanglee.babyship.entity.rbac_jpa.User">
         update user
         <set>
             <if test="name!=null">

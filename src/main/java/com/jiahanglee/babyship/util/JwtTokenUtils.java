@@ -23,7 +23,7 @@ public class JwtTokenUtils {
     /**
      * 签发者
      */
-    private static final String ISS = "LLy";
+    private static final String ISS = "jiahangLee";
 
     /**
      * 过期时间是3600秒，既是1个小时

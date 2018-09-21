@@ -1,6 +1,9 @@
 package com.jiahanglee.babyship.service.impl;
 
+import com.jiahanglee.babyship.dao.UserDao;
 import com.jiahanglee.babyship.entity.rbac_jpa.JwtUser;
+import com.jiahanglee.babyship.entity.rbac_jpa.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -8,7 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
- * @Author:aha
+ * @Author:
  * @Description:自定义登录验证规则
  * @Date: 2018/8/9 16:00
  * @Modified By:
@@ -30,6 +33,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      * @return
      * @throws UsernameNotFoundException
      */
+    @Autowired
+    private UserDao userDao;
     @Override
     public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
 
@@ -39,11 +44,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
          * 验证时需要有密码规则即需要用户注册时将密码加密插入数据库
          * 举例：
          */
-        String realPhone = "15512343256";
-        String openId = "";
-        if(realPhone.equals(phone)){
-            openId = bCryptPasswordEncoder().encode("1002222224998989");
-        }
-        return new JwtUser(realPhone,openId);
+//        String realPhone = "15512343256";
+//        String openId = "";
+//        if(realPhone.equals(phone)){
+//            openId = bCryptPasswordEncoder().encode("1002222224998989");
+//        }
+        User user = userDao.selectByName(phone);
+        JwtUser jwtUser =  new JwtUser(user.getName(),bCryptPasswordEncoder().encode(user.getPassword()));
+        System.out.println(jwtUser);
+        return jwtUser;
     }
 }

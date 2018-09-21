@@ -17,8 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  * @Author:aha
- * @Description:
- * SpringSecurity的配置
+ * @Description: SpringSecurity的配置
  * 通过SpringSecurity的配置，将JWTLoginFilter，JWTAuthenticationFilter组合在一起
  * @Date: 2018/8/9 16:43
  * @Modified By:
@@ -32,7 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("userDetailsServiceImpl")
     private UserDetailsService userDetailsService;
 
-    public BCryptPasswordEncoder bCryptPasswordEncoder(){
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -46,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 //自定义登录页面
-              //.loginPage("login.html")
+                //.loginPage("login.html")
                 .and()
                 .logout()
                 .and()

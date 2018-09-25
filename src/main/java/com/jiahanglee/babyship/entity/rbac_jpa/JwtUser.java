@@ -22,10 +22,10 @@ public class JwtUser implements UserDetails {
 
     @Autowired
     private UserService userService;
-    public JwtUser(String phone,String openId) {
+    public JwtUser(String phone,String openId,String role) {
         name = phone;
         password = openId;
-        authorities = Collections.singleton(new SimpleGrantedAuthority("1"));
+        authorities = Collections.singleton(new SimpleGrantedAuthority(role));
     }
 
         @Override

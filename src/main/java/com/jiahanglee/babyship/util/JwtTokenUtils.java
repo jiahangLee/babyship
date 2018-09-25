@@ -5,6 +5,8 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.util.Date;
+import java.util.HashMap;
+
 /**
  * @Author:aha
  * @Description:jwt工具类
@@ -40,13 +42,13 @@ public class JwtTokenUtils {
      * @param isRememberMe
      * @return
      */
-    public static String createToken(String username, boolean isRememberMe) {
+    public static String createToken(String username,String role, boolean isRememberMe) {
         long expiration = isRememberMe ? EXPIRATION_REMEMBER : EXPIRATION;
-//        HashMap<String, Object> map = new HashMap<>();
-//        map.put("rol", role);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("rol", role);
         String token = Jwts.builder()
                 .signWith(SignatureAlgorithm.HS512, SECRET)
-//                .setClaims(map)
+                .setClaims(map)
                 .setIssuer(ISS)
                 .setSubject(username)
                 .setIssuedAt(new Date())

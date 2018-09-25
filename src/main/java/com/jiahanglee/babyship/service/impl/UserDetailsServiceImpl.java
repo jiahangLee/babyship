@@ -50,7 +50,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 //            openId = bCryptPasswordEncoder().encode("1002222224998989");
 //        }
         User user = userDao.selectByName(phone);
-        JwtUser jwtUser =  new JwtUser(user.getName(),bCryptPasswordEncoder().encode(user.getPassword()));
+        String role = userDao.selectRoleByName(phone).toString();
+        JwtUser jwtUser =  new JwtUser(user.getName(),bCryptPasswordEncoder().encode(user.getPassword()),role);
         return jwtUser;
     }
 }

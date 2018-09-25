@@ -25,6 +25,7 @@ import java.util.ArrayList;
  */
 public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
+
     private AuthenticationManager authenticationManager;
 
     public JWTLoginFilter(AuthenticationManager authenticationManager){
@@ -42,7 +43,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
             System.out.println("尝试登录");
 
             //手机号
-            String phone = request.getParameter("name");
+            String phone = request.getParameter("username");
 
             //用户openId
             String openId = request.getParameter("password");
@@ -67,11 +68,12 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
                                             Authentication authResult) throws IOException, ServletException {
 
         String principal = ((JwtUser)authResult.getPrincipal()).getUsername();
-
-        String token = JwtTokenUtils.createToken(principal,false);
+        //这里拿到role
+        String token = JwtTokenUtils.createToken(principal.toString(),false);
 
         System.out.println("【登录成功，token->】"+JwtTokenUtils.TOKEN_PREFIX+token);
         response.addHeader(JwtTokenUtils.TOKEN_HEADER,JwtTokenUtils.TOKEN_PREFIX+token);
+        response.setHeader("token",JwtTokenUtils.TOKEN_PREFIX+token);
     }
 
     /**

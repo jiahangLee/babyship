@@ -5,8 +5,6 @@ import com.jiahanglee.babyship.filter.JWTAuthenticationFilter;
 import com.jiahanglee.babyship.filter.JWTLoginFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -40,6 +38,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers("/hello").authenticated()
+                // 需要角色为ADMIN才能删除该资源
+                .antMatchers("/hello2").hasAuthority("1")
                 // 其他都放行了
                 .anyRequest().permitAll()
                 .and()

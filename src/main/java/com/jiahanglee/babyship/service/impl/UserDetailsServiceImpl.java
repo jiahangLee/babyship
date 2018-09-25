@@ -51,7 +51,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 //        }
         User user = userDao.selectByName(phone);
         JwtUser jwtUser =  new JwtUser(user.getName(),bCryptPasswordEncoder().encode(user.getPassword()));
-        System.out.println(jwtUser);
         return jwtUser;
     }
 }

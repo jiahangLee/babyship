@@ -50,7 +50,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
             //用户openId
             String openId = request.getParameter("password");
-
+            response.setHeader("Access-Control-Allow-Origin", "*");
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             phone,openId,new ArrayList<>()
@@ -82,6 +82,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         String token = JwtTokenUtils.createToken(principal,role,false);
         //cookie中不能有空格
         Cookie cookie = new Cookie("token",token);
+        cookie.setMaxAge(123456);
         response.addCookie(cookie);
         System.out.println("【登录成功，token->】"+JwtTokenUtils.TOKEN_PREFIX+token);
         response.addHeader(JwtTokenUtils.TOKEN_HEADER,JwtTokenUtils.TOKEN_PREFIX+token);

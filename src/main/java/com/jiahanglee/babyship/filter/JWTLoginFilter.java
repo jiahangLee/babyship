@@ -16,8 +16,11 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 验证用户名密码正确后，生成一个token，并将token返回给客户端
@@ -87,6 +90,9 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         System.out.println("【登录成功，token->】"+JwtTokenUtils.TOKEN_PREFIX+token);
         response.addHeader(JwtTokenUtils.TOKEN_HEADER,JwtTokenUtils.TOKEN_PREFIX+token);
         response.setHeader("token",JwtTokenUtils.TOKEN_PREFIX+token);
+        response.setStatus(200);
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("application/json; charset=utf-8");
     }
 
     /**

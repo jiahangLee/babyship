@@ -50,6 +50,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 //            openId = bCryptPasswordEncoder().encode("1002222224998989");
 //        }
         User user = userDao.selectByName(phone);
+        if(user == null)
+        {
+            throw new UsernameNotFoundException("用户名不存在");
+        }
         String role = userDao.selectRoleByName(phone).toString();
         JwtUser jwtUser =  new JwtUser(user.getName(),bCryptPasswordEncoder().encode(user.getPassword()),role);
         return jwtUser;

@@ -96,7 +96,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         response.setContentType("application/json; charset=utf-8");
         PrintWriter writer = response.getWriter();
         Map<String, String> map = new HashMap<>();
-        map.put("status", "success");
+        map.put("message", "success");
 //        writer.write(map.toString());
         writer.write(String.valueOf(new JSONObject(map)));
     }

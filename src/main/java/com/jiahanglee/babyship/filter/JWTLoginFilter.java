@@ -3,6 +3,7 @@ package com.jiahanglee.babyship.filter;
 
 import com.jiahanglee.babyship.entity.rbac_jpa.JwtUser;
 import com.jiahanglee.babyship.util.JwtTokenUtils;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -93,6 +94,11 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         response.setStatus(200);
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json; charset=utf-8");
+        PrintWriter writer = response.getWriter();
+        Map<String, String> map = new HashMap<>();
+        map.put("status", "success");
+//        writer.write(map.toString());
+        writer.write(String.valueOf(new JSONObject(map)));
     }
 
     /**

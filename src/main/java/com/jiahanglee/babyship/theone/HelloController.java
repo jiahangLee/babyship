@@ -1,12 +1,16 @@
 package com.jiahanglee.babyship.theone;
 
 import com.jiahanglee.babyship.util.FileUploadUtil;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,8 +41,19 @@ public class HelloController {
     }
 
     @GetMapping(value = "/hello2")
-    public String say2() {
-        return girlProperties.getCupSize();
+    public void say2(HttpServletResponse response, HttpServletRequest request) {
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("application/json; charset=utf-8");
+        PrintWriter writer = null;
+        try {
+            writer = response.getWriter();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Map<String, String> map = new HashMap<>();
+        map.put("status", "success");
+        writer.write(new JSONObject(map).toString());
+
     }
     @PostMapping(value = "/upload")
     public String save(MultipartFile file) {

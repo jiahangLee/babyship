@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,7 +33,11 @@ public class NewsController {
             @RequestParam(name = "pageNum", required = false, defaultValue = "1")
                     int pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "10")
-                    int pageSize) {
+                    int pageSize,
+            HttpServletResponse response,HttpServletRequest request
+    ) {
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8000");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
         return newsService.findAllTeacher(pageNum, pageSize);
     }
 

@@ -54,7 +54,6 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
             //用户openId
             String openId = request.getParameter("password");
-            response.setHeader("Access-Control-Allow-Origin", "*");
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             phone,openId,new ArrayList<>()
@@ -85,7 +84,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         //这里拿到role
         String token = JwtTokenUtils.createToken(principal,role,false);
         //cookie中不能有空格
-        Cookie cookie = new Cookie("token",token);
+        Cookie cookie = new Cookie(JwtTokenUtils.TOKEN_HEADER,token);
         cookie.setMaxAge(123456);
         response.addCookie(cookie);
         System.out.println("【登录成功，token->】"+JwtTokenUtils.TOKEN_PREFIX+token);
@@ -94,6 +93,11 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         response.setStatus(200);
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json; charset=utf-8");
+//        response.setHeader("Access-Control-Expose-Headers","Origin,X-Pagination-Current-Page,Content-Type,Accept" );
+        response.setHeader("Accept","application/json");
+        //设置前端接收cookie
+        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8000");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
         PrintWriter writer = response.getWriter();
         Map<String, String> map = new HashMap<>();
         map.put("message", "success");

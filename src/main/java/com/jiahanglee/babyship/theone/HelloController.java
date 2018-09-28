@@ -42,8 +42,6 @@ public class HelloController {
 
     @GetMapping(value = "/hello2")
     public void say2(HttpServletResponse response, HttpServletRequest request) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8000");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json; charset=utf-8");
         PrintWriter writer = null;

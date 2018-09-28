@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -30,6 +31,7 @@ import java.util.Map;
  * successfulAuthentication ：用户成功登录后，这个方法会被调用，我们在这个方法里生成token。
  * @author aha on 2018/8/6 17:47
  */
+@CrossOrigin
 public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
 
@@ -51,7 +53,8 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
             //手机号
             String phone = request.getParameter("username");
-
+            //在此处可以设置跨域成功
+            response.setHeader("Access-Control-Allow-Origin", "*");
             //用户openId
             String openId = request.getParameter("password");
             return authenticationManager.authenticate(
@@ -59,6 +62,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
                             phone,openId,new ArrayList<>()
                     )
             );
+
         }catch (Exception e){
             throw new RuntimeException(e);
         }
@@ -85,7 +89,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         String token = JwtTokenUtils.createToken(principal,role,false);
         //cookie中不能有空格
         Cookie cookie = new Cookie(JwtTokenUtils.TOKEN_HEADER,token);
-        cookie.setMaxAge(123456);
+        cookie.setMaxAge(1234566666);
         response.addCookie(cookie);
         System.out.println("【登录成功，token->】"+JwtTokenUtils.TOKEN_PREFIX+token);
         response.addHeader(JwtTokenUtils.TOKEN_HEADER,JwtTokenUtils.TOKEN_PREFIX+token);
@@ -93,10 +97,11 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         response.setStatus(200);
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json; charset=utf-8");
-//        response.setHeader("Access-Control-Expose-Headers","Origin,X-Pagination-Current-Page,Content-Type,Accept" );
+//      response.setHeader("Access-Control-Expose-Headers","Origin,X-Pagination-Current-Page,Content-Type,Accept" );
         response.setHeader("Accept","application/json");
+        response.setHeader("Access-Control-Expose-Headers","*");
         //设置前端接收cookie
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8000");
+        response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         PrintWriter writer = response.getWriter();
         Map<String, String> map = new HashMap<>();
@@ -110,6 +115,14 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
      */
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+        //下面的跨域设置不知道为什么不管用，前端照样会报错
+        response.setHeader("Access-Control-Allow-Origin", "*");
         response.getWriter().write("authentication failed, reason: " + failed.getMessage());
+        PrintWriter writer = response.getWriter();
+        Map<String, String> map = new HashMap<>();
+        map.put("message", "success");
+//        writer.write(map.toString());
+        writer.write(String.valueOf(new JSONObject(map)));
+
     }
 }

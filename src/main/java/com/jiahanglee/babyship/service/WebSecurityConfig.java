@@ -37,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.cors().and().csrf().disable().authorizeRequests()
-//                .antMatchers("/hello2").authenticated()
+                .antMatchers("/hello2").authenticated()
                 // 需要角色为ADMIN才能删除该资源
 //                .antMatchers("/hello2").hasAuthority("1")
                 // 其他都放行了

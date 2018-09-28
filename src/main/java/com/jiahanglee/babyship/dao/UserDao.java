@@ -28,4 +28,6 @@ public interface UserDao {
     User selectByName(String name);
 
     Integer selectRoleByName(String name);
+
+    String selectCnameByName(String name);
 }

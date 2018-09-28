@@ -56,8 +56,14 @@
     </select>
     <select id="selectByName" parameterType="String" resultType="com.jiahanglee.babyship.entity.rbac_jpa.User">
         SELECT
-        <include refid="BASE_COLUMN"/>
+        id,name,description,major,password,cn_name cnName
         From user
+        where name = #{name}
+    </select>
+    <select id="selectCnameByName" parameterType="String" resultType="String">
+        SELECT
+        cn_name cnName
+        FROM user
         where name = #{name}
     </select>
     <delete id="delete" parameterType="Integer">

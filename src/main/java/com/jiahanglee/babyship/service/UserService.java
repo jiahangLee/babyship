@@ -20,4 +20,6 @@ public interface UserService {
   User selectByUser(String user);
 
   Integer selectRoleByName(String name);
+
+  String selectCname(String name);
 }

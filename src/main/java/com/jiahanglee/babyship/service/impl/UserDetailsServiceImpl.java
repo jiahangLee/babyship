@@ -55,7 +55,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             throw new UsernameNotFoundException("用户名不存在");
         }
         String role = userDao.selectRoleByName(phone).toString();
-        JwtUser jwtUser =  new JwtUser(user.getName(),bCryptPasswordEncoder().encode(user.getPassword()),role);
+        JwtUser jwtUser =  new JwtUser(user.getName(),bCryptPasswordEncoder().encode(user.getPassword()),role,user.getCnName());
         return jwtUser;
     }
 }

@@ -18,14 +18,16 @@ public class JwtUser implements UserDetails {
     private Integer id;
     private String name;
     private String password;
+    private String cn_name;
     private Collection<? extends GrantedAuthority> authorities;
 
     @Autowired
     private UserService userService;
-    public JwtUser(String phone,String openId,String role) {
+    public JwtUser(String phone,String openId,String role,String cname) {
         name = phone;
         password = openId;
         authorities = Collections.singleton(new SimpleGrantedAuthority(role));
+        cn_name = cname;
     }
 
         @Override
@@ -36,6 +38,14 @@ public class JwtUser implements UserDetails {
     @Override
     public String getPassword() {
         return password;
+    }
+
+    public String getCn_name() {
+        return cn_name;
+    }
+
+    public void setCn_name(String cn_name) {
+        this.cn_name = cn_name;
     }
 
     @Override
@@ -69,7 +79,9 @@ public class JwtUser implements UserDetails {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", password='" + password + '\'' +
+                ", cn_name='" + cn_name + '\'' +
                 ", authorities=" + authorities +
+                ", userService=" + userService +
                 '}';
     }
 

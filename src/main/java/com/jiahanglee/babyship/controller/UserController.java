@@ -103,4 +103,9 @@ public class UserController {
     public Object selectByName(@RequestParam(value = "id",required = false)Integer id){
         return userService.selectUser(id);
     }
+
+    @GetMapping(value = "selectCname")
+    public String selectCname(@RequestParam(value = "name",required = false)String name){
+        return userService.selectCname(name);
+    }
 }

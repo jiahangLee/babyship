@@ -9,6 +9,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -80,6 +82,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         JwtUser principal001 = ((JwtUser)authResult.getPrincipal());
         String principal = principal001.getUsername();
         String role = "";
+        String Cname = principal001.getCn_name();
         // 因为在JwtUser中存了权限信息，可以直接获取，由于只有一个角色就这么干了
         Collection<? extends GrantedAuthority> authorities = principal001.getAuthorities();
         for (GrantedAuthority authority : authorities){
@@ -106,8 +109,12 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         PrintWriter writer = response.getWriter();
         Map<String, String> map = new HashMap<>();
         map.put("message", "success");
+        map.put("Cname",Cname);
 //        writer.write(map.toString());
         writer.write(String.valueOf(new JSONObject(map)));
+//        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+//                .getAuthentication()
+//                .getPrincipal();
     }
 
     /**

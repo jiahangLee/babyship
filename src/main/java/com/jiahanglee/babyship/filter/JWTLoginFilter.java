@@ -31,6 +31,7 @@ import java.util.Map;
  * 该类继承自UsernamePasswordAuthenticationFilter，重写了其中的2个方法
  * attemptAuthentication ：接收并解析用户凭证。
  * successfulAuthentication ：用户成功登录后，这个方法会被调用，我们在这个方法里生成token。
+ *
  * @author aha on 2018/8/6 17:47
  */
 @CrossOrigin
@@ -39,18 +40,18 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private AuthenticationManager authenticationManager;
 
-    public JWTLoginFilter(AuthenticationManager authenticationManager){
+    public JWTLoginFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
     }
 
     /**
-     *接收并解析用户凭证
+     * 接收并解析用户凭证
      */
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
         //从输入流中获取登录信息
-        try{
+        try {
             System.out.println("尝试登录");
 
             //手机号
@@ -61,11 +62,11 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
             String openId = request.getParameter("password");
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            phone,openId,new ArrayList<>()
+                            phone, openId, new ArrayList<>()
                     )
             );
 
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
@@ -79,37 +80,37 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
 
-        JwtUser principal001 = ((JwtUser)authResult.getPrincipal());
+        JwtUser principal001 = ((JwtUser) authResult.getPrincipal());
         String principal = principal001.getUsername();
         String role = "";
         String Cname = principal001.getCn_name();
         // 因为在JwtUser中存了权限信息，可以直接获取，由于只有一个角色就这么干了
         Collection<? extends GrantedAuthority> authorities = principal001.getAuthorities();
-        for (GrantedAuthority authority : authorities){
+        for (GrantedAuthority authority : authorities) {
             role = authority.getAuthority();
         }
         //这里拿到role
-        String token = JwtTokenUtils.createToken(principal,role,false);
+        String token = JwtTokenUtils.createToken(principal, role, false);
         //cookie中不能有空格
-        Cookie cookie = new Cookie(JwtTokenUtils.TOKEN_HEADER,token);
-        cookie.setMaxAge(1234566666);
-        response.addCookie(cookie);
-        System.out.println("【登录成功，token->】"+JwtTokenUtils.TOKEN_PREFIX+token);
-        response.addHeader(JwtTokenUtils.TOKEN_HEADER,JwtTokenUtils.TOKEN_PREFIX+token);
-        response.setHeader("token",JwtTokenUtils.TOKEN_PREFIX+token);
+//        Cookie cookie = new Cookie(JwtTokenUtils.TOKEN_HEADER,token);
+//        cookie.setMaxAge(1234566666);
+//        response.addCookie(cookie);
+        System.out.println("【登录成功，token->】" + JwtTokenUtils.TOKEN_PREFIX + token);
+        response.addHeader(JwtTokenUtils.TOKEN_HEADER, JwtTokenUtils.TOKEN_PREFIX + token);
+        response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX + token);
         response.setStatus(200);
         response.setCharacterEncoding("utf-8");
         response.setContentType("application/json; charset=utf-8");
 //      response.setHeader("Access-Control-Expose-Headers","Origin,X-Pagination-Current-Page,Content-Type,Accept" );
-        response.setHeader("Accept","application/json");
-        response.setHeader("Access-Control-Expose-Headers","*");
+        response.setHeader("Accept", "application/json");
+        response.setHeader("Access-Control-Expose-Headers", "*");
         //设置前端接收cookie
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         PrintWriter writer = response.getWriter();
         Map<String, String> map = new HashMap<>();
         map.put("message", "success");
-        map.put("Cname",Cname);
+        map.put("Cname", Cname);
 //        writer.write(map.toString());
         writer.write(String.valueOf(new JSONObject(map)));
 //        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
@@ -128,7 +129,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         PrintWriter writer = response.getWriter();
         Map<String, String> map = new HashMap<>();
         map.put("message", "success");
-//        writer.write(map.toString());
+//      writer.write(map.toString());
         writer.write(String.valueOf(new JSONObject(map)));
 
     }

@@ -24,11 +24,20 @@ public class Teacher {
     private Integer id;
     private String name;
     private String url;
+    private String major;
     private String description;
     @CreatedDate
     private Timestamp createTime;
     @LastModifiedDate
     private Timestamp updateTime;
+
+    public String getMajor() {
+        return major;
+    }
+
+    public void setMajor(String major) {
+        this.major = major;
+    }
 
     public Integer getId() {
         return id;
@@ -78,6 +87,7 @@ public class Teacher {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", url='" + url + '\'' +
+                ", major='" + major + '\'' +
                 ", description='" + description + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +

@@ -6,20 +6,20 @@
 	</sql>
 
 	<sql id="BASE_COLUMN">
-		id,name,url,description,create_time,update_time
+		id,name,url,major,description,create_time,update_time
 	</sql>
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.jiahanglee.babyship.entity.Teacher">
 		INSERT INTO
 		<include refid="BASE_TABLE"/>
 		<trim prefix="(" suffix=")" suffixOverrides=",">
-			name,url,description,create_time,update_time
+			name,url,major,description,create_time,update_time
 			<!--<if test="name != null">-->
 				<!--phone,-->
 			<!--</if>-->
 		</trim>
 		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
-			#{name, jdbcType=VARCHAR},#{url, jdbcType=VARCHAR},#{description, jdbcType=VARCHAR},CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP
+			#{name, jdbcType=VARCHAR},#{url, jdbcType=VARCHAR},#{major, jdbcType=VARCHAR},#{description, jdbcType=VARCHAR},CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP
 			<!--<if test="phone != null">-->
 				<!--#{phone, jdbcType=VARCHAR},-->
 			<!--</if>-->
@@ -43,6 +43,9 @@
 		<set>
 			<if test="name!=null">
 				name = #{name},
+			</if>
+			<if test="major!=null">
+				major = #{major},
 			</if>
 			<if test="description!=null">
 				description = #{description},

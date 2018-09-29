@@ -90,7 +90,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/selectByName")
-    public Object selectByName(@RequestParam(value = "name",required = false)String name){
+    public Object selectByName1(@RequestParam(value = "name",required = false)String name){
         return userService.selectByUser(name);
     }
 

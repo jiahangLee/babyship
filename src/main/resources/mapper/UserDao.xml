@@ -6,7 +6,7 @@
     </sql>
 
     <sql id="BASE_COLUMN">
-        id,name,description,major,password
+        id,name,description,password
     </sql>
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id"
@@ -14,13 +14,13 @@
         INSERT INTO
         <include refid="BASE_TABLE"/>
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            name,description,major,password,create_time,update_time
+            name,description,cn_name,password,create_time,update_time
             <!--<if test="name != null">-->
             <!--phone,-->
             <!--</if>-->
         </trim>
         <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
-            #{name, jdbcType=VARCHAR},#{description, jdbcType=VARCHAR},#{major, jdbcType=VARCHAR},"123456",CURRENT_TIMESTAMP
+            #{name, jdbcType=VARCHAR},#{description, jdbcType=VARCHAR},#{cnName, jdbcType=VARCHAR},"123456",CURRENT_TIMESTAMP
             ,CURRENT_TIMESTAMP
             <!--<if test="phone != null">-->
             <!--#{phone, jdbcType=VARCHAR},-->
@@ -30,7 +30,7 @@
 
     <select id="selectUser" resultType="com.jiahanglee.babyship.entity.rbac_jpa.User">
         SELECT
-        <include refid="BASE_COLUMN"/>
+        id,name,description,major,password,cn_name cnName
         FROM
         <include refid="BASE_TABLE"/>
         ORDER BY id
@@ -79,8 +79,8 @@
             <if test="description!=null">
                 description = #{description},
             </if>
-            <if test="major!=null">
-                major = #{major},
+            <if test="cnName!=null">
+                cn_name = #{cnName},
             </if>
             update_time = CURRENT_TIMESTAMP
         </set>

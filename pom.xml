@@ -35,7 +35,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+        <!--获取config配置参数-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-configuration-processor</artifactId>
@@ -65,11 +65,11 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
-		<dependency>
-			<groupId>com.mchange</groupId>
-			<artifactId>c3p0</artifactId>
-			<version>0.9.5.2</version>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>com.mchange</groupId>-->
+			<!--<artifactId>c3p0</artifactId>-->
+			<!--<version>0.9.5.2</version>-->
+		<!--</dependency>-->
 		<!--SpringBoot1.5以上已经抛弃了Velocity，我们直接用thymeleaf-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

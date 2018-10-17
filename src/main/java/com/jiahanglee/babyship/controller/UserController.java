@@ -1,5 +1,6 @@
 package com.jiahanglee.babyship.controller;
 
+import com.jiahanglee.babyship.entity.Modify;
 import com.jiahanglee.babyship.entity.rbac_jpa.User;
 import com.jiahanglee.babyship.service.UserService;
 import com.jiahanglee.babyship.service.impl.UserServiceImpl;
@@ -57,6 +58,11 @@ public class UserController {
     @PostMapping(value = "/updateUser")
     public void updateUser(User user) {
         userService.update(user);
+    }
+    @PostMapping(value = "/updateUser2")
+    public void updateUser2(Modify modify) {
+        System.out.println("修改密码");
+        userService.update2(modify.getOldPassword(),modify.getPassword());
     }
 
     @GetMapping(value = "/allUser")

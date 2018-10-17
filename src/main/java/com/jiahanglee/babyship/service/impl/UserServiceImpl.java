@@ -38,6 +38,10 @@ public class UserServiceImpl implements UserService{
     public void update(User user) {
          userDao.update(user);
     }
+    @Override
+    public void update2(String old_password,String password) {
+         userDao.update2(old_password,password);
+    }
 
     @Override
     public User selectUser(Integer id) {

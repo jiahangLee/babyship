@@ -84,6 +84,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         String principal = principal001.getUsername();
         String role = "";
         String Cname = principal001.getCn_name();
+        String username = principal001.getUsername();
         // 因为在JwtUser中存了权限信息，可以直接获取，由于只有一个角色就这么干了
         Collection<? extends GrantedAuthority> authorities = principal001.getAuthorities();
         for (GrantedAuthority authority : authorities) {
@@ -111,6 +112,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         Map<String, String> map = new HashMap<>();
         map.put("message", "success");
         map.put("Cname", Cname);
+        map.put("username",username);
 //        writer.write(map.toString());
         writer.write(String.valueOf(new JSONObject(map)));
 //        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()

@@ -44,6 +44,7 @@ public class User {
     private String password;
     private String major;
     private String description;
+    private String rolea;
     @CreationTimestamp
     @Column(name = "create_time",columnDefinition="DATETIME COMMENT '添加时间'")
     private Timestamp createTime;
@@ -98,6 +99,13 @@ public class User {
         this.updateTime = updateTime;
     }
 
+    public String getRolea() {
+        return rolea;
+    }
+
+    public void setRolea(String rolea) {
+        this.rolea = rolea;
+    }
 
     public int getId() {
 
@@ -135,7 +143,7 @@ public class User {
                 ", description='" + description + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
-                ", role=" + role +
+                ", rolea=" + rolea +
                 '}';
     }
 }

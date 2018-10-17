@@ -27,12 +27,12 @@
             <!--</if>-->
         </trim>
     </insert>
-
     <select id="selectUser" resultType="com.jiahanglee.babyship.entity.rbac_jpa.User">
         SELECT
-        id,name,description,major,password,cn_name cnName
+        user.id id,user.name name,user.description,major,password,cn_name cnName,role.name rolea
         FROM
-        <include refid="BASE_TABLE"/>
+        user,role,user_role
+        where user.id = user_role.user_id and user_role.role_id = role.id
         ORDER BY id
     </select>
     <select id="selectById" parameterType="Integer" resultType="com.jiahanglee.babyship.entity.rbac_jpa.User">
@@ -85,5 +85,15 @@
             update_time = CURRENT_TIMESTAMP
         </set>
         WHERE id = #{id}
+    </update>
+    <update id="update2" parameterType="Modify">
+        update user
+        <set>
+            <if test="password!=null">
+                password = #{password},
+            </if>
+            update_time = CURRENT_TIMESTAMP
+        </set>
+        WHERE name = #{username} and password = #{oldPassword}
     </update>
 </mapper>

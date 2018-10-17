@@ -12,6 +12,7 @@ public interface UserService {
   int deleteUser(Integer id);
 
   void update(User user);
+  void update2(String old_password,String password);
 
   User selectUser(Integer id);
 

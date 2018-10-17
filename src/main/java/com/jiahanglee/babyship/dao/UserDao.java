@@ -1,5 +1,6 @@
 package com.jiahanglee.babyship.dao;
 
+import com.jiahanglee.babyship.entity.Modify;
 import com.jiahanglee.babyship.entity.Teacher;
 import com.jiahanglee.babyship.entity.rbac_jpa.User;
 
@@ -18,7 +19,7 @@ public interface UserDao {
     int delete(int id);
 
     void update(User user);
-    void update2(String old_password,String password);
+    void update2(Modify modify);
 
     List<User> selectUser();
 

@@ -1,5 +1,6 @@
 package com.jiahanglee.babyship.service;
 import com.github.pagehelper.PageInfo;
+import com.jiahanglee.babyship.entity.Modify;
 import com.jiahanglee.babyship.entity.rbac_jpa.User;
 
 
@@ -12,7 +13,7 @@ public interface UserService {
   int deleteUser(Integer id);
 
   void update(User user);
-  void update2(String old_password,String password);
+  void update2(Modify modify);
 
   User selectUser(Integer id);
 

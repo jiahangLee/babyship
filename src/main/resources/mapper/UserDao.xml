@@ -86,7 +86,7 @@
         </set>
         WHERE id = #{id}
     </update>
-    <update id="update2" parameterType="Modify">
+    <update id="update2" parameterType="com.jiahanglee.babyship.entity.Modify">
         update user
         <set>
             <if test="password!=null">

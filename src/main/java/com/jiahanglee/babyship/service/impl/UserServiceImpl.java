@@ -3,6 +3,7 @@ package com.jiahanglee.babyship.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jiahanglee.babyship.dao.UserDao;
+import com.jiahanglee.babyship.entity.Modify;
 import com.jiahanglee.babyship.entity.rbac_jpa.User;
 import com.jiahanglee.babyship.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,8 +40,8 @@ public class UserServiceImpl implements UserService{
          userDao.update(user);
     }
     @Override
-    public void update2(String old_password,String password) {
-         userDao.update2(old_password,password);
+    public void update2(Modify modify) {
+         userDao.update2(modify);
     }
 
     @Override

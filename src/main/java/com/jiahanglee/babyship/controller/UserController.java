@@ -56,13 +56,15 @@ public class UserController {
     }
 
     @PostMapping(value = "/updateUser")
-    public void updateUser(User user) {
+    public void updateUser(User user)
+    {
+        System.out.println("修改密码"+user.toString());
         userService.update(user);
     }
     @PostMapping(value = "/updateUser2")
     public void updateUser2(Modify modify) {
-        System.out.println("修改密码");
-        userService.update2(modify.getOldPassword(),modify.getPassword());
+        System.out.println("修改密码"+modify.toString());
+        userService.update2(modify);
     }
 
     @GetMapping(value = "/allUser")

@@ -27,8 +27,43 @@ package com.jiahanglee.babyship.entity;
  */
 public class Modify {
 
+    private String username;
     private String oldPassword;
     private String password;
+    private String agreement;
+    private String confirm;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getConfirm() {
+        return confirm;
+    }
+
+    public void setConfirm(String confirm) {
+        this.confirm = confirm;
+    }
+
+    public String getAgreement() {
+        return agreement;
+    }
+
+    public void setAgreement(String agreement) {
+        this.agreement = agreement;
+    }
+
+    public String getConfig() {
+        return confirm;
+    }
+
+    public void setConfig(String confirm) {
+        this.confirm = confirm;
+    }
 
     public String getOldPassword() {
         return oldPassword;
@@ -49,8 +84,11 @@ public class Modify {
     @Override
     public String toString() {
         return "Modify{" +
-                "oldPassword='" + oldPassword + '\'' +
+                "username='" + username + '\'' +
+                ", oldPassword='" + oldPassword + '\'' +
                 ", password='" + password + '\'' +
+                ", agreement='" + agreement + '\'' +
+                ", confirm='" + confirm + '\'' +
                 '}';
     }
 }

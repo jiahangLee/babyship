@@ -94,7 +94,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         String token = JwtTokenUtils.createToken(principal, role, false);
         //cookie中不能有空格
         Cookie cookie = new Cookie(JwtTokenUtils.TOKEN_HEADER,token);
-        cookie.setMaxAge(1234566666);
+        cookie.setMaxAge(10);
         response.addCookie(cookie);
         System.out.println("【登录成功，token->】" + JwtTokenUtils.TOKEN_PREFIX + token);
         response.addHeader(JwtTokenUtils.TOKEN_HEADER, JwtTokenUtils.TOKEN_PREFIX + token);

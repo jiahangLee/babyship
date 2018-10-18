@@ -29,7 +29,7 @@ public class JwtTokenUtils {
     /**
      * 过期时间是3600秒，既是1个小时
      */
-    private static final long EXPIRATION = 10L;
+    private static final long EXPIRATION = 7200L;
 
     /**
      * 选择了记住我之后的过期时间为7天

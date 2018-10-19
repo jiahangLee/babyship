@@ -11,7 +11,7 @@ spring:
           #监控统计拦截的filters
           filters: stat
           driver-class-name: com.mysql.jdbc.Driver
-          url: jdbc:mysql://127.0.0.1:3306/201807031?useUnicode=true&characterEncoding=utf-8&useSSL=false&amp;useOldAliasMetadataBehavior=true
+          url: jdbc:mysql://127.0.0.1:3306/201807031?useUnicode=true&characterEncoding=utf-8&useSSL=false
           username: root
           password: 123456
           initial-size: 1

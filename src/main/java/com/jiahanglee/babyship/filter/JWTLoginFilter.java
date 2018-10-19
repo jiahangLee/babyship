@@ -90,8 +90,9 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         for (GrantedAuthority authority : authorities) {
             role = authority.getAuthority();
         }
+        System.out.println(request.getParameter("remember"));
         //这里拿到role
-        String token = JwtTokenUtils.createToken(principal, role, false);
+        String token = JwtTokenUtils.createToken(principal, role, Boolean.parseBoolean(request.getParameter("remember")));
         //cookie中不能有空格
         Cookie cookie = new Cookie(JwtTokenUtils.TOKEN_HEADER,token);
         cookie.setMaxAge(10);

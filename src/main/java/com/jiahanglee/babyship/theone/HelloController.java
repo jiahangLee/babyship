@@ -52,7 +52,9 @@ public class HelloController {
         }
         Map<String, String> map = new HashMap<>();
         map.put("status", "success");
-        writer.write(new JSONObject(map).toString());
+        if (writer != null) {
+            writer.write(new JSONObject(map).toString());
+        }
 
     }
     @PostMapping(value = "/upload")

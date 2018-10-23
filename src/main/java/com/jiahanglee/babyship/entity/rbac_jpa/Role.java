@@ -49,8 +49,8 @@ public class Role {
     private Timestamp updateTime;
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @JoinTable(name = "user_role", joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-//            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
-    @JoinColumn(name = "id")
+//  inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
+    @JoinColumn(name = "id")  //指明要对应的字段名字叫id，默认对应另一张表的privilege_id
     private Set<Privilege> privilege = new HashSet<>();
     @Override
     public String toString() {

@@ -45,6 +45,7 @@ public class Menu {
     @UpdateTimestamp
     @Column(name = "update_time",columnDefinition="DATETIME COMMENT '最后更新时间'")
     private Timestamp updateTime;
+
     public int getParentId() {
         return parentId;
     }

@@ -8,6 +8,7 @@ import com.jiahanglee.babyship.util.treeAuth.TreeNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -57,15 +58,26 @@ import java.util.List;
         }
 
         @GetMapping(value = "/allMenu")
-        public List<TreeNode<Menu>> allMenu(
+        public TreeNode<Menu> allMenu(
                 @RequestParam(name = "pageNum", required = false, defaultValue = "1")
                         int pageNum,
                 @RequestParam(name = "pageSize", required = false, defaultValue = "10")
                         int pageSize
         ) {
             List<Menu> list =  menuService.findAllMenu(pageNum, pageSize);
-            ConvertTree convertTree = new ConvertTree<>();
-            return convertTree.getForest(list,"id","parentId");
+
+            for(Menu menu:list){
+                if(menu.getId() == 4)
+                {
+                    TreeNode<Menu> test2= new TreeNode<>(menu,new ArrayList<>());
+
+                    test2.setChildrenNode(test2.childrenNode(list,"id","parentId"));
+                    return test2;
+                }
+            }
+
+
+            return null;
         }
 
 

@@ -54,4 +54,12 @@ public class TreeNode<T> {
         }
         return childrenNode;
     }
+
+    @Override
+    public String toString() {
+        return "TreeNode{" +
+                "data=" + data +
+                ", childrenNode=" + childrenNode +
+                '}';
+    }
 }

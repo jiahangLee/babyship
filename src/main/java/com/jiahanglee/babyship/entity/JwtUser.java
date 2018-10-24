@@ -1,4 +1,4 @@
-package com.jiahanglee.babyship.entity.rbac_jpa;
+package com.jiahanglee.babyship.entity;
 
 
 import com.jiahanglee.babyship.service.UserService;

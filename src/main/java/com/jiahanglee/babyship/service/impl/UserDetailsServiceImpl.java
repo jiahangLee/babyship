@@ -1,7 +1,7 @@
 package com.jiahanglee.babyship.service.impl;
 
 import com.jiahanglee.babyship.dao.UserDao;
-import com.jiahanglee.babyship.entity.rbac_jpa.JwtUser;
+import com.jiahanglee.babyship.entity.JwtUser;
 import com.jiahanglee.babyship.entity.rbac_jpa.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

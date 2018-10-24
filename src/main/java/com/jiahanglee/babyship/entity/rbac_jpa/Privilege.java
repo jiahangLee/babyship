@@ -77,7 +77,7 @@ public class Privilege {
 
     @Override
     public String toString() {
-        return "Privilege{" +
+        return "PrivilegeDao{" +
                 "id=" + id +
                 ", name=" + name +
                 ", description='" + description + '\'' +

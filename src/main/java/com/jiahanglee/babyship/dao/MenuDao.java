@@ -37,6 +37,7 @@ public interface MenuDao {
     void update(Menu menu);
 
     List<Menu> selectMenu();
+    List<Menu> selectByRole(Integer role);
 
     Menu selectById(Integer id);
 }

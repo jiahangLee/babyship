@@ -45,7 +45,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    public List<Menu> findAllMenu(int pageNum, int pageSize) {
+    public List<Menu> findAllMenu() {
         //将参数传给这个方法就可以实现物理分页了，非常简单。
         List<Menu> privilegeDomains = MenuDao.selectMenu();
         return privilegeDomains;
@@ -64,5 +64,10 @@ public class MenuServiceImpl implements MenuService {
     @Override
     public Menu selectMenu(Integer id) {
         return MenuDao.selectById(id);
+    }
+
+    @Override
+    public List<Menu> selectByRole(Integer role) {
+        return MenuDao.selectByRole(role);
     }
 }

@@ -88,11 +88,11 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         for (GrantedAuthority authority : authorities) {
             role = authority.getAuthority();
         }
-        System.out.println(request.getParameter("remember"));
+//        System.out.println(request.getParameter("remember"));
         //这里拿到role
         String token = JwtTokenUtils.createToken(principal, role, Boolean.parseBoolean(request.getParameter("remember")));
         //cookie中不能有空格
-        Cookie cookie = new Cookie(JwtTokenUtils.TOKEN_HEADER,token);
+        Cookie cookie = new Cookie(JwtTokenUtils.TOKEN_HEADER, token);
         cookie.setMaxAge(10);
         response.addCookie(cookie);
         System.out.println("【登录成功，token->】" + JwtTokenUtils.TOKEN_PREFIX + token);
@@ -111,7 +111,8 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         Map<String, String> map = new HashMap<>();
         map.put("message", "success");
         map.put("Cname", Cname);
-        map.put("username",username);
+        map.put("username", username);
+        map.put("roleId",role);
 //        writer.write(map.toString());
         writer.write(String.valueOf(new JSONObject(map)));
 //        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()

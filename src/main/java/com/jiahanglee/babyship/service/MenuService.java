@@ -34,7 +34,8 @@ public interface MenuService {
 
     int addMenu(Menu menu);
 
-    List<Menu> findAllMenu(int pageNum, int pageSize);
+    List<Menu> findAllMenu();
+    List<Menu> selectByRole(Integer role);
 
     int deleteMenu(Integer id);
 

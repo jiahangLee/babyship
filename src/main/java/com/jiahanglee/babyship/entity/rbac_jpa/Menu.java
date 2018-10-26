@@ -36,15 +36,27 @@ public class Menu {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
+    private String keyId;
     private String name;
     private String description;
     private int parentId;
+    private Integer level;
+    private Integer status;
+
     @CreationTimestamp
     @Column(name = "create_time",columnDefinition="DATETIME COMMENT '添加时间'")
     private Timestamp createTime;
     @UpdateTimestamp
     @Column(name = "update_time",columnDefinition="DATETIME COMMENT '最后更新时间'")
     private Timestamp updateTime;
+
+    public String getKeyId() {
+        return keyId;
+    }
+
+    public void setKeyId(String keyId) {
+        this.keyId = keyId;
+    }
 
     public int getParentId() {
         return parentId;
@@ -94,13 +106,32 @@ public class Menu {
         this.updateTime = updateTime;
     }
 
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Menu{" +
                 "id=" + id +
+                ", keyId='" + keyId + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", parentId=" + parentId +
+                ", level=" + level +
+                ", status=" + status +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 '}';

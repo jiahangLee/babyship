@@ -14,8 +14,10 @@ public class Privilege {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
-    private int name;
+    private String name;
     private String description;
+    private Integer status;
+    private Integer level;
     @CreationTimestamp
     @Column(name = "create_time",columnDefinition="DATETIME COMMENT '添加时间'")
     private Timestamp createTime;
@@ -35,12 +37,28 @@ public class Privilege {
         this.id = id;
     }
 
-    public int getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(int name) {
+    public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     public String getDescription() {
@@ -77,10 +95,12 @@ public class Privilege {
 
     @Override
     public String toString() {
-        return "PrivilegeDao{" +
+        return "Privilege{" +
                 "id=" + id +
-                ", name=" + name +
+                ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", status=" + status +
+                ", level=" + level +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 ", menu=" + menu +

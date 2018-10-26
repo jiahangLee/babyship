@@ -1,5 +1,6 @@
 package com.jiahanglee.babyship.controller;
 
+import com.jiahanglee.babyship.entity.RolePlus;
 import com.jiahanglee.babyship.entity.rbac_jpa.Role;
 import com.jiahanglee.babyship.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,12 @@ public class RoleController {
     private RoleService roleService;
 
     @PostMapping(value = "/addRole")
-    public int addRole(Role role) {
+    public int addRole(RolePlus rolePlus) {
+        System.out.println(rolePlus.toString());
+        Role role = new Role();
+        role.setId(rolePlus.getId());
+        role.setName(rolePlus.getName());
+        role.setName(rolePlus.getDescription());
         return roleService.addRole(role);
     }
 

@@ -1,6 +1,7 @@
 package com.jiahanglee.babyship.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.jiahanglee.babyship.entity.MenuTree;
 import com.jiahanglee.babyship.entity.rbac_jpa.Menu;
 import com.jiahanglee.babyship.service.MenuService;
 import com.jiahanglee.babyship.util.treeAuth.ConvertTree;
@@ -85,7 +86,7 @@ public class MenuController {
         //获取所有菜单
         List<Menu> allMenus = menuService.findAllMenu();
         //获取该role下所有menus
-        List<Menu> aboutMenus = menuService.selectByRole(2);
+        List<Menu> aboutMenus = menuService.selectByRole(role);
         System.out.println(aboutMenus);
         //向上拓展，获取完整上级
         List<Menu> menuTree = initMenuData(allMenus,aboutMenus);
@@ -142,6 +143,16 @@ public class MenuController {
             }
 
         }
+    }
+    //获取数据库全部菜单，用于角色设计接口
+    @GetMapping(value = "/designRole")
+    public List<TreeNode<Menu>> designRole(){
+        //获取所有菜单
+        List<Menu> allMenus = menuService.findAllMenu();
+        ConvertTree<Menu> convertTree = new ConvertTree<>();
+        List<TreeNode<Menu>> forest = convertTree.getForest(allMenus, "id", "parentId");
+        System.out.println(forest);
+        return forest;
     }
 
 }

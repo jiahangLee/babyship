@@ -8,6 +8,7 @@ import com.jiahanglee.babyship.entity.rbac_jpa.User;
 import com.jiahanglee.babyship.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,8 +18,11 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private UserDao userDao;
     @Override
+    @Transactional
     public int addUser(User user) {
-        return userDao.insert(user);
+        int x = userDao.insert(user);
+        System.out.println("这里是services："+user.getId());
+        return x;
     }
 
     @Override

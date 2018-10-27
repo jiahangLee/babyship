@@ -45,10 +45,9 @@ public class RoleController {
     public int addRole(RolePlus rolePlus) {
         System.out.println(rolePlus.toString());
         Role role = new Role();
-        role.setId(rolePlus.getId());
         role.setName(rolePlus.getName());
         role.setName(rolePlus.getDescription());
-        return roleService.addRole(role);
+        return roleService.addRole(role,rolePlus.getEditor());
     }
 
     @GetMapping(value = "/deleteRole")

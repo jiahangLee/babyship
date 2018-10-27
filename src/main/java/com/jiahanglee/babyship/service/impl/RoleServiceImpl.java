@@ -3,11 +3,18 @@ package com.jiahanglee.babyship.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jiahanglee.babyship.dao.RoleDao;
+import com.jiahanglee.babyship.entity.RolePlus;
 import com.jiahanglee.babyship.entity.rbac_jpa.Role;
 import com.jiahanglee.babyship.service.RoleService;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service(value = "roleService")
@@ -16,8 +23,19 @@ public class RoleServiceImpl implements RoleService{
     @Autowired
     private RoleDao roleDao;
     @Override
-    public int addRole(Role role) {
-        return roleDao.insert(role);
+    @Transactional
+    public int addRole(Role role,String editor) {
+        int roleId = roleDao.insert(role);
+        JSONObject jsonArray = new JSONObject();
+        try {
+            System.out.println(jsonArray.getJSONArray(editor));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        return 1;
     }
 
     @Override

@@ -1,11 +1,12 @@
 package com.jiahanglee.babyship.service;
 import com.github.pagehelper.PageInfo;
+import com.jiahanglee.babyship.entity.RolePlus;
 import com.jiahanglee.babyship.entity.rbac_jpa.Role;
 
 
 public interface RoleService {
 
-  int addRole(Role role);
+  int addRole(Role role,String editor);
 
   PageInfo<Role> findAllRole(int pageNum, int pageSize);
 

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiahanglee.babyship.dao.RolePrivilegeDao" >
+	<sql id="BASE_TABLE">
+		role_privilege
+	</sql>
+
+	<sql id="BASE_COLUMN">
+		role_id,privilege_id
+	</sql>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO
+		<include refid="BASE_TABLE"/>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			role_id,privilege_id
+			<!--<if test="name != null">-->
+				<!--phone,-->
+			<!--</if>-->
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			#{role_id},#{privilege_id}
+			<!--<if test="phone != null">-->
+				<!--#{phone, jdbcType=VARCHAR},-->
+			<!--</if>-->
+		</trim>
+	</insert>
+
+	<select id="selectTeachers" resultType="map">
+		SELECT
+		<include refid="BASE_COLUMN"/>
+		FROM
+		<include refid="BASE_TABLE"/>
+		ORDER BY role_id
+	</select>
+
+	<delete id="delete">
+		delete From role_privilege WHERE role_id = #{role_id}
+	</delete>
+
+	<update id = "update">
+		update role_privilege
+		<set>
+			<if test="name!=null">
+				role_id = #{role_id},
+			</if>
+			<if test="description!=null">
+				privilege_id = #{privilege_id},
+			</if>
+		</set>
+        WHERE role_id = #{role_id}
+	</update>
+</mapper>

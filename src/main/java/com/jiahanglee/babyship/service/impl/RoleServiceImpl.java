@@ -2,39 +2,75 @@ package com.jiahanglee.babyship.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.jiahanglee.babyship.dao.RoleDao;
-import com.jiahanglee.babyship.entity.RolePlus;
+import com.jiahanglee.babyship.dao.*;
+import com.jiahanglee.babyship.entity.rbac_jpa.Privilege;
 import com.jiahanglee.babyship.entity.rbac_jpa.Role;
 import com.jiahanglee.babyship.service.RoleService;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Service(value = "roleService")
 public class RoleServiceImpl implements RoleService{
 
     @Autowired
     private RoleDao roleDao;
+    @Autowired
+    private PrivilegeDao privilegeDao;
+    @Autowired
+    private MenuDao menuDao;
+    @Autowired
+    private PrivilegeMenuDao privilegeMenuDao;
+    @Autowired
+    private RolePrivilegeDao rolePrivilegeDao;
     @Override
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)
     public int addRole(Role role,String editor) {
-        int roleId = roleDao.insert(role);
-        JSONObject jsonArray = new JSONObject();
-        try {
-            System.out.println(jsonArray.getJSONArray(editor));
+        //插入role表
+        roleDao.insert(role);
 
+        //插入privilege表
+        Privilege privilege = new Privilege();
+        privilege.setLevel(1);
+        privilege.setDescription(role.getName()+"的菜单权限");
+        privilegeDao.insert(privilege);
+        //插入关联表
+        //获取二级菜单id的集合
+        List<String> list= new ArrayList<>();
+        List needMenuId = new ArrayList();
+        try {
+            JSONArray jsonArray = new JSONArray(editor);
+            System.out.println("转成的JSONArray:"+jsonArray);
+            for(int i=0;i<jsonArray.length();i++){
+                list.add(jsonArray.get(i).toString());
+            }
+                     //流操作
+             needMenuId = list.stream()
+                    .filter(x->(x.charAt(0)>='0' && x.charAt(0)<='9'))
+                    .map(x->menuDao.selectByKeyId(x))
+                    .distinct()
+                    .collect(toList());
+            System.out.println("原数组是："+list);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
+        System.out.println("a是："+needMenuId);
 
+        //插入privilege_menu关联表
+        needMenuId.stream()
+                .forEach(x->{
+                    privilegeMenuDao.insert(privilege.getId(),(int)x);
+                });
+        //插入role_privilege关联表
+        rolePrivilegeDao.insert(role.getId(),privilege.getId());
         return 1;
     }
 
@@ -43,8 +79,7 @@ public class RoleServiceImpl implements RoleService{
         //将参数传给这个方法就可以实现物理分页了，非常简单。
         PageHelper.startPage(pageNum, pageSize);
         List<Role> roleDomains = roleDao.selectRole();
-        PageInfo result = new PageInfo(roleDomains);
-        return result;
+        return new PageInfo(roleDomains);
     }
 
     @Override

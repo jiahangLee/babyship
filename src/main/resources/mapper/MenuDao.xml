@@ -42,6 +42,13 @@
         <include refid="BASE_TABLE"/>
         WHERE id = #{id}
     </select>
+    <select id="selectByKeyId"  resultType="Integer">
+        SELECT
+        id
+        FROM
+        <include refid="BASE_TABLE"/>
+        WHERE key_id = #{key_id}
+    </select>
     <select id="selectByRole" parameterType="Integer" resultType="com.jiahanglee.babyship.entity.rbac_jpa.Menu">
         SELECT
         menu.id,menu.name,menu.description,parent_id parentId,key_id keyId,level,status

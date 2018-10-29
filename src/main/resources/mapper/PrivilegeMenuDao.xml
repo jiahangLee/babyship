@@ -10,20 +10,8 @@
 	</sql>
 
 	<insert id="insert" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO
-		<include refid="BASE_TABLE"/>
-		<trim prefix="(" suffix=")" suffixOverrides=",">
-			privilege_id,menu_id
-			<!--<if test="name != null">-->
-				<!--phone,-->
-			<!--</if>-->
-		</trim>
-		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
-			#{privilege_id},#{menu_id}
-			<!--<if test="phone != null">-->
-				<!--#{phone, jdbcType=VARCHAR},-->
-			<!--</if>-->
-		</trim>
+		insert into privilege_menu (privilege_id, menu_id)
+		values (#{privilegeId}, #{menuId})
 	</insert>
 
 	<select id="selectTeachers" resultType="map">

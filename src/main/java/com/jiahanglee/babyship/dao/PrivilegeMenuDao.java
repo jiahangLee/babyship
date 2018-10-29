@@ -1,6 +1,8 @@
 package com.jiahanglee.babyship.dao;
 
 import com.jiahanglee.babyship.entity.News;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -11,7 +13,7 @@ public interface PrivilegeMenuDao {
     String INSERT_FIELDS = "id,name";
     String SELECT_FIELDS = "ID,NAME,url";
 
-    int insert(int privilegeId,int menuId);
+    int insert(@Param("privilegeId") int privilegeId, @Param("menuId") int menuId);
 
 //    List<News> selectTeachers();
 

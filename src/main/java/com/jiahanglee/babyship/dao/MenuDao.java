@@ -40,4 +40,5 @@ public interface MenuDao {
     List<Menu> selectByRole(Integer role);
 
     Menu selectById(Integer id);
+    Integer selectByKeyId(String id);
 }

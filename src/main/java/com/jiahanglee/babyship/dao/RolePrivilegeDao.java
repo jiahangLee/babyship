@@ -1,6 +1,7 @@
 package com.jiahanglee.babyship.dao;
 
 import com.jiahanglee.babyship.entity.News;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ public interface RolePrivilegeDao {
     String INSERT_FIELDS = "id,name";
     String SELECT_FIELDS = "ID,NAME,url";
 
-    int insert(int roleId,int privilegeId);
+    int insert(@Param("role_id") int roleId,@Param("privilege_id") int privilegeId);
 
 //    List<News> selectTeachers();
 

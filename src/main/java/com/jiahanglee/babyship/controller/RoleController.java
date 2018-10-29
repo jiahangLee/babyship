@@ -73,6 +73,14 @@ public class RoleController {
     ) {
         return roleService.findAllRole(pageNum, pageSize);
     }
-
+    @GetMapping(value = "/allRoles")
+    public Object allRoles(
+            @RequestParam(name = "pageNum", required = false, defaultValue = "1")
+                    int pageNum,
+            @RequestParam(name = "pageSize", required = false, defaultValue = "10")
+                    int pageSize
+    ) {
+        return roleService.findAllRole(pageNum, 100);
+    }
 
 }

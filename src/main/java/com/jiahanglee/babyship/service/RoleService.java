@@ -12,7 +12,7 @@ public interface RoleService {
 
   int deleteRole(Integer id);
 
-  void update(Role role);
+  void update(Role role,String editor);
 
   Role selectRole(Integer id);
 

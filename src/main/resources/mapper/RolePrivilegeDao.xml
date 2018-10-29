@@ -33,7 +33,10 @@
 		<include refid="BASE_TABLE"/>
 		ORDER BY role_id
 	</select>
-
+	<select id="selectByRole" resultType="int">
+		select privilege_id privilegeId from role_privilege
+		where role_id = #{roleId}
+	</select>
 	<delete id="delete">
 		delete From role_privilege WHERE role_id = #{role_id}
 	</delete>

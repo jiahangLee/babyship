@@ -54,10 +54,14 @@ public class RoleController {
     public int deleteRole(@RequestParam(name = "id", required = false) Integer id) {
         return roleService.deleteRole(id);
     }
-
     @PostMapping(value = "/updateRole")
-    public void updateRole(Role role) {
-        roleService.update(role);
+    public void updateRole(RolePlus rolePlus) {
+        System.out.println(rolePlus.toString());
+        Role role = new Role();
+        role.setId(rolePlus.getId());
+        role.setName(rolePlus.getName());
+        role.setName(rolePlus.getDescription());
+        roleService.update(role,rolePlus.getEditor());
     }
 
     @GetMapping(value = "/allRole")

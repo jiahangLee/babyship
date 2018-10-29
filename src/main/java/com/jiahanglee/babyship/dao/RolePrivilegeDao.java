@@ -17,6 +17,7 @@ public interface RolePrivilegeDao {
 //    List<News> selectTeachers();
 
     int delete(int roleId);
+    int selectByRole(int roleId);
 
     void update(int roleId,int privilegeId);
 

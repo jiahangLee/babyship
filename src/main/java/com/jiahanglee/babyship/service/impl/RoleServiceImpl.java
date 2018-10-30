@@ -93,34 +93,36 @@ public class RoleServiceImpl implements RoleService{
         //修改常规字段
          roleDao.update(role);
         //获取二级菜单id的集合
-        List<String> list= new ArrayList<>();
-        List needMenuId = new ArrayList();
-        try {
-            JSONArray jsonArray = new JSONArray(editor);
-            System.out.println("转成的JSONArray:"+jsonArray);
-            for(int i=0;i<jsonArray.length();i++){
-                list.add(jsonArray.get(i).toString());
+        if(!editor.equals("")) {
+            List<String> list = new ArrayList<>();
+            List needMenuId = new ArrayList();
+            try {
+                JSONArray jsonArray = new JSONArray(editor);
+                System.out.println("转成的JSONArray:" + jsonArray);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    list.add(jsonArray.get(i).toString());
+                }
+                //流操作
+                needMenuId = list.stream()
+                        .filter(x -> (x.charAt(0) >= '0' && x.charAt(0) <= '9'))
+                        .map(x -> menuDao.selectByKeyId(x))
+                        .distinct()
+                        .collect(toList());
+                System.out.println("原数组是：" + list);
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            //流操作
-            needMenuId = list.stream()
-                    .filter(x->(x.charAt(0)>='0' && x.charAt(0)<='9'))
-                    .map(x->menuDao.selectByKeyId(x))
-                    .distinct()
-                    .collect(toList());
-            System.out.println("原数组是："+list);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
-        //通过roleId获取privilegeId
-        int privilegeId = rolePrivilegeDao.selectByRole(role.getId());
-        //修改privilege_menu表
-        privilegeMenuDao.delete(privilegeId);
-        //插入privilege_menu关联表
-        needMenuId.stream()
-                .forEach(x->{
-                    privilegeMenuDao.insert(privilegeId,(int)x);
-                });
+            //通过roleId获取privilegeId
+            int privilegeId = rolePrivilegeDao.selectByRole(role.getId());
+            //修改privilege_menu表
+            privilegeMenuDao.delete(privilegeId);
+            //插入privilege_menu关联表
+            needMenuId.stream()
+                    .forEach(x -> {
+                        privilegeMenuDao.insert(privilegeId, (int) x);
+                    });
+        }
     }
 
     @Override

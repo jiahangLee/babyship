@@ -6,13 +6,13 @@ import com.jiahanglee.babyship.entity.rbac_jpa.User;
 
 public interface UserService {
 
-  int addUser(User user);
+  int addUser(User user,String roleId);
 
   PageInfo<User> findAllUser(int pageNum, int pageSize);
 
   int deleteUser(Integer id);
 
-  void update(User user);
+  void update(User user,int roleId);
   void update2(Modify modify);
 
   User selectUser(Integer id);

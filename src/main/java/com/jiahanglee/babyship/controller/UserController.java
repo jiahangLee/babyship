@@ -1,18 +1,11 @@
 package com.jiahanglee.babyship.controller;
 
 import com.jiahanglee.babyship.entity.Modify;
+import com.jiahanglee.babyship.entity.UserPlus;
 import com.jiahanglee.babyship.entity.rbac_jpa.User;
 import com.jiahanglee.babyship.service.UserService;
-import com.jiahanglee.babyship.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.List;
 
 /**
  * code is far away from bug with the animal protecting
@@ -46,8 +39,14 @@ public class UserController {
     private UserService userService;
 
     @PostMapping(value = "/addUser")
-    public int addUser(User user) {
-        return userService.addUser(user);
+    public int addUser(UserPlus userPlus) {
+        User user = new User();
+        user.setCnName(userPlus.getCnName());
+        user.setMajor(userPlus.getMajor());
+        user.setDescription(userPlus.getDescription());
+        user.setName(userPlus.getName());
+        userService.addUser(user,userPlus.getRoleId());
+        return 1;
     }
 
     @GetMapping(value = "/deleteUser")
@@ -56,10 +55,15 @@ public class UserController {
     }
 
     @PostMapping(value = "/updateUser")
-    public void updateUser(User user)
+    public void updateUser(UserPlus userPlus)
     {
-        System.out.println("修改密码"+user.toString());
-        userService.update(user);
+        User user = new User();
+        user.setId(userPlus.getId());
+        user.setCnName(userPlus.getCnName());
+        user.setMajor(userPlus.getMajor());
+        user.setDescription(userPlus.getDescription());
+        user.setName(userPlus.getName());
+        userService.update(user,Integer.parseInt(userPlus.getRoleId()));
     }
     @PostMapping(value = "/updateUser2")
     public void updateUser2(Modify modify) {

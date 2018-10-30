@@ -3,6 +3,7 @@ package com.jiahanglee.babyship.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.jiahanglee.babyship.dao.UserDao;
+import com.jiahanglee.babyship.dao.UserRoleDao;
 import com.jiahanglee.babyship.entity.Modify;
 import com.jiahanglee.babyship.entity.rbac_jpa.User;
 import com.jiahanglee.babyship.service.UserService;
@@ -17,11 +18,14 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private UserRoleDao userRoleDao;
     @Override
-    @Transactional
-    public int addUser(User user) {
+    @Transactional(rollbackFor=Exception.class)
+    public int addUser(User user,String roleId) {
         int x = userDao.insert(user);
         System.out.println("这里是services："+user.getId());
+        userRoleDao.insert(user.getId(), Integer.parseInt(roleId));
         return x;
     }
 
@@ -35,13 +39,19 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Transactional(rollbackFor=Exception.class)
     public int deleteUser(Integer id) {
+        userRoleDao.delete(id);
         return userDao.delete(id);
     }
 
     @Override
-    public void update(User user) {
+    @Transactional(rollbackFor=Exception.class)
+    public void update(User user,int roleId) {
          userDao.update(user);
+         System.out.println(user.toString());
+         userRoleDao.update(user.getId(),roleId);
+         System.out.println(roleId);
     }
     @Override
     public void update2(Modify modify) {

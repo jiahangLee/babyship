@@ -46,7 +46,7 @@ public class RoleController {
         System.out.println(rolePlus.toString());
         Role role = new Role();
         role.setName(rolePlus.getName());
-        role.setName(rolePlus.getDescription());
+        role.setDescription(rolePlus.getDescription());
         return roleService.addRole(role,rolePlus.getEditor());
     }
 
@@ -60,7 +60,7 @@ public class RoleController {
         Role role = new Role();
         role.setId(rolePlus.getId());
         role.setName(rolePlus.getName());
-        role.setName(rolePlus.getDescription());
+        role.setDescription(rolePlus.getDescription());
         roleService.update(role,rolePlus.getEditor());
     }
 

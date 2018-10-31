@@ -1,3 +1,6 @@
 server:
   port: 8002
-web.upload-path: C:\Users\Administrator\Desktop
+system-params:
+  upload: C:/Users/Administrator/Desktop/upload
+  uploadplus: C:/Users/Administrator/Desktop/uploadplus
+

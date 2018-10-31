@@ -1,2 +1,5 @@
 server:
-  port: 8001
+  port: 8002
+system-params:
+  upload: var/upload
+  uploadplus: var/uploadplus

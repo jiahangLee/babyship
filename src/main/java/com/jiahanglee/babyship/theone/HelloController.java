@@ -27,6 +27,8 @@ public class HelloController {
 
     @Autowired
     private GirlProperties girlProperties;
+    @Autowired
+    SystemParams systemParams;
 
     /**
      * @return java.lang.String
@@ -62,7 +64,7 @@ public class HelloController {
         System.out.print( file.getName());
         String msg = "";
         // 要上传的目标文件存放路径
-        String localPath = "C:/Users/Administrator/Desktop/upload";
+        String localPath = systemParams.getUpload();
         msg= FileUploadUtil.upload(file,localPath,file.getOriginalFilename());
 
         System.out.println(msg);
@@ -80,7 +82,7 @@ public class HelloController {
         System.out.print( file.getName());
         String msg = "";
         // 要上传的目标文件存放路径
-        String localPath = "C:/Users/Administrator/Desktop/uploadplus";
+        String localPath = systemParams.getUploadplus();
         msg= FileUploadUtil.upload(file,localPath,file.getOriginalFilename());
 
         ingredients.put("link","http://localhost:8002/babyship/download?url="+msg );

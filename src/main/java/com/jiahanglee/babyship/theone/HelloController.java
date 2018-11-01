@@ -85,7 +85,7 @@ public class HelloController {
         String localPath = systemParams.getUploadplus();
         msg= FileUploadUtil.upload(file,localPath,file.getOriginalFilename());
 
-        ingredients.put("link","http://localhost:8002/babyship/download?url="+msg );
+        ingredients.put("link","http://"+systemParams.getWeb_url2()+"/babyship/download?url="+msg );
         jsonObj.put("data",new JSONObject(ingredients));
         System.out.println(msg);
         return jsonObj.toString().replaceAll("\\\\","");

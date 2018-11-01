@@ -9,7 +9,24 @@ public class SystemParams {
 
     private String upload;
     private String uploadplus;
+    private String web_url;
+    private String web_url2;
 
+    public String getWeb_url2() {
+        return web_url2;
+    }
+
+    public void setWeb_url2(String web_url2) {
+        this.web_url2 = web_url2;
+    }
+
+    public String getWeb_url() {
+        return web_url;
+    }
+
+    public void setWeb_url(String web_url) {
+        this.web_url = web_url;
+    }
 
     public String getUpload() {
         return upload;
@@ -32,6 +49,8 @@ public class SystemParams {
         return "SystemParams{" +
                 "upload='" + upload + '\'' +
                 ", uploadplus='" + uploadplus + '\'' +
+                ", web_url='" + web_url + '\'' +
+                ", web_url2='" + web_url2 + '\'' +
                 '}';
     }
 }

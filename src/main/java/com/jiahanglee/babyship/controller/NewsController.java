@@ -3,6 +3,7 @@ package com.jiahanglee.babyship.controller;
 import com.jiahanglee.babyship.entity.News;
 import com.jiahanglee.babyship.service.NewsService;
 import com.jiahanglee.babyship.service.TeacherService;
+import com.jiahanglee.babyship.theone.SystemParams;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +23,8 @@ import java.io.IOException;
 public class NewsController {
     @Autowired
     private NewsService newsService;
-
+    @Autowired
+    SystemParams systemParams;
     @PostMapping("/addNews")
     public int addUser(News user) {
         return newsService.addTeacher(user);
@@ -36,7 +38,7 @@ public class NewsController {
                     int pageSize,
             HttpServletResponse response,HttpServletRequest request
     ) {
-        response.setHeader("Access-Control-Allow-Origin", "http://localhost:8000");
+        response.setHeader("Access-Control-Allow-Origin", systemParams.getWeb_url());
         response.setHeader("Access-Control-Allow-Credentials", "true");
         return newsService.findAllTeacher(pageNum, pageSize);
     }

@@ -3,5 +3,5 @@ server:
 system-params:
   upload: /usr/local/tomcat/apache-tomcat-7.0.85/webapps/upload
   uploadplus: /usr/local/tomcat/apache-tomcat-7.0.85/webapps/uploadplus
-  web-url: http://123.206.91.106:8080
+  web-url: http://www.jiahanglee.club:8080
   web-url2: 123.206.91.106:8002

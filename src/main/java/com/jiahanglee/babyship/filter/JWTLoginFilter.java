@@ -103,7 +103,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         response.setContentType("application/json; charset=utf-8");
 //      response.setHeader("Access-Control-Expose-Headers","Origin,X-Pagination-Current-Page,Content-Type,Accept" );
         response.setHeader("Accept", "application/json");
-        response.setHeader("Access-Control-Expose-Headers", "*");
+        response.setHeader("Access-Control-Expose-Headers", "token");
         //设置前端接收cookie
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Credentials", "true");

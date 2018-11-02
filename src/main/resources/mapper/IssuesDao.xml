@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jiahanglee.babyship.dao.IssuesDao" >
+	<sql id="BASE_TABLE">
+		issues
+	</sql>
+
+	<sql id="BASE_COLUMN">
+		id,name,description,editor,create_time,update_time
+	</sql>
+
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.jiahanglee.babyship.entity.Issues">
+		INSERT INTO
+		<include refid="BASE_TABLE"/>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			name,description,editor,create_time,update_time
+			<!--<if test="name != null">-->
+				<!--phone,-->
+			<!--</if>-->
+		</trim>
+		<trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+			#{name, jdbcType=VARCHAR},#{description, jdbcType=VARCHAR},#{editor, jdbcType=VARCHAR},CURRENT_TIMESTAMP,CURRENT_TIMESTAMP
+			<!--<if test="phone != null">-->
+				<!--#{phone, jdbcType=VARCHAR},-->
+			<!--</if>-->
+		</trim>
+	</insert>
+
+	<select id="selectTeachers" resultType="com.jiahanglee.babyship.entity.Issues">
+		SELECT
+		<include refid="BASE_COLUMN"/>
+		FROM
+		<include refid="BASE_TABLE"/>
+		ORDER BY id
+	</select>
+
+	<delete id="delete" parameterType="Integer">
+		delete From issues WHERE id = #{id}
+	</delete>
+
+	<update id = "update"   parameterType = "com.jiahanglee.babyship.entity.Issues">
+		update issues
+		<set>
+			<if test="name!=null">
+				name = #{name},
+			</if>
+			<if test="description!=null">
+				description = #{description},
+			</if>
+			<if test="url!=null">
+				url = #{url},
+			</if>
+			<if test="editor!=null">
+				editor = #{editor},
+			</if>
+			update_time = CURRENT_TIMESTAMP
+		</set>
+        WHERE id = #{id}
+	</update>
+</mapper>

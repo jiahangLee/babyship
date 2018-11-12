@@ -3,6 +3,7 @@ package com.jiahanglee.babyship.service;
 
 import com.jiahanglee.babyship.filter.JWTAuthenticationFilter;
 import com.jiahanglee.babyship.filter.JWTLoginFilter;
+import com.jiahanglee.babyship.util.JWTAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -51,7 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .and()
                 .addFilter(new JWTLoginFilter(authenticationManager()))
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()));
+                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
+                .exceptionHandling().authenticationEntryPoint(new JWTAuthenticationEntryPoint());
     }
 
 

@@ -29,9 +29,7 @@ package com.jiahanglee.babyship.util;
 
 
 import java.io.UnsupportedEncodingException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
+import java.security.*;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Objects;
@@ -42,6 +40,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
@@ -95,32 +94,56 @@ public class AESUtil {
     public static String decrypt(String content, String password) {
 
         try {
-            KeyGenerator kgen = KeyGenerator.getInstance("AES");
-            kgen.init(128, new SecureRandom(password.getBytes("utf-8")));
-            SecretKey secretKey = kgen.generateKey();
-            byte[] enCodeFormat = secretKey.getEncoded();
-            SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
-            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");// 创建密码器
-            cipher.init(Cipher.DECRYPT_MODE, key);// 初始化
-            System.out.println("密码构造器完成" + content + "::" + Arrays.toString(Base64.getDecoder().decode(content)));
-            byte[] result = cipher.doFinal(Base64.getDecoder().decode(content));
-            String a = new String(result);
-            System.out.println(a);
-            return a;
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            e.printStackTrace();
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        } catch (IllegalBlockSizeException e) {
-            e.printStackTrace();
-        } catch (BadPaddingException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+//            if (password) {
+//                MessageDigest md = MessageDigest.getInstance("MD5");
+//                key = md.digest(key);
+//            }
+            SecretKeySpec skeySpec = null;
+            try {
+                skeySpec = new SecretKeySpec(password.getBytes("utf-8"), "AES");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            Cipher cipher = Cipher.getInstance("AES/CBC/ISO10126Padding"); //"算法/模式/补码方式"
+            IvParameterSpec ivps = null;//使用CBC模式，需要一个向量iv，可增加加密算法的强度
+            try {
+                ivps = new IvParameterSpec(password.getBytes("utf-8"));
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            cipher.init(Cipher.DECRYPT_MODE, skeySpec, ivps);
+            return new String(cipher.doFinal(Base64.getDecoder().decode(content)));
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException | IllegalBlockSizeException | BadPaddingException ex) {
+//            logger.error(ex.getLocalizedMessage());
         }
         return null;
+//        try {
+//            KeyGenerator kgen = KeyGenerator.getInstance("AES");
+//            kgen.init(128, new SecureRandom(password.getBytes("utf-8")));
+//            SecretKey secretKey = kgen.generateKey();
+//            byte[] enCodeFormat = secretKey.getEncoded();
+//            SecretKeySpec key = new SecretKeySpec(enCodeFormat, "AES");
+//            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");// 创建密码器
+//            cipher.init(Cipher.DECRYPT_MODE, key);// 初始化
+//            System.out.println("密码构造器完成" + content + "::" + Arrays.toString(Base64.getDecoder().decode(content)));
+//            byte[] result = cipher.doFinal(Base64.getDecoder().decode(content));
+//            String a = new String(result);
+//            System.out.println(a);
+//            return a;
+//        } catch (NoSuchAlgorithmException e) {
+//            e.printStackTrace();
+//        } catch (NoSuchPaddingException e) {
+//            e.printStackTrace();
+//        } catch (InvalidKeyException e) {
+//            e.printStackTrace();
+//        } catch (IllegalBlockSizeException e) {
+//            e.printStackTrace();
+//        } catch (BadPaddingException e) {
+//            e.printStackTrace();
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
     }
 
 

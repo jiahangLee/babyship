@@ -2,6 +2,7 @@ package com.jiahanglee.babyship.filter;
 
 
 import com.jiahanglee.babyship.entity.JwtUser;
+import com.jiahanglee.babyship.util.AESUtil;
 import com.jiahanglee.babyship.util.JwtTokenUtils;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,10 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 验证用户名密码正确后，生成一个token，并将token返回给客户端
@@ -58,9 +56,12 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
             response.setHeader("Access-Control-Allow-Origin", "*");
             //用户openId
             String openId = request.getParameter("password");
+            //打开AESUtil加密
+            String pass = AESUtil.decrypt(openId,
+                    "jiahanglee123456");
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            phone, openId, new ArrayList<>()
+                            phone,pass, new ArrayList<>()
                     )
             );
 

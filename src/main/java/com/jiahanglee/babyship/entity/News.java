@@ -39,6 +39,7 @@ public class News {
     private String name;
     private String url;
     private String description;
+    @Column(columnDefinition = "text")
     private String editor;
     @CreationTimestamp
     @Column(name = "create_time",columnDefinition="DATETIME COMMENT '添加时间'")

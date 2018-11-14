@@ -4,5 +4,5 @@ system-params:
   upload: C:/Users/Administrator/Desktop/upload
   uploadplus: C:/Users/Administrator/Desktop/uploadplus
   web-url: http://localhost:8000
-  web-url2: http://localhost:8000
+  web-url2: localhost:8002
 

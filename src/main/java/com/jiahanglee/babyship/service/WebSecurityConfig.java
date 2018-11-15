@@ -1,6 +1,7 @@
 package com.jiahanglee.babyship.service;
 
 
+import com.jiahanglee.babyship.authorize.AuthorizeConfigManager;
 import com.jiahanglee.babyship.filter.JWTAuthenticationFilter;
 import com.jiahanglee.babyship.filter.JWTLoginFilter;
 import com.jiahanglee.babyship.util.JWTAuthenticationEntryPoint;
@@ -30,6 +31,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Qualifier("userDetailsServiceImpl")
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private AuthorizeConfigManager authorizeConfigManager;
+
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -37,14 +41,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers("/hello2").authenticated()
-                // 需要角色为ADMIN才能删除该资源
-//                .antMatchers("/hello2").hasAuthority("1")
-                // 其他都放行了
-                .anyRequest().permitAll()
+        http.cors().and().csrf().disable()
                 //跳转登录页面
-                .and()
                 .formLogin()
                 //自定义登录页面
                 //.loginPage("login.html")
@@ -54,6 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilter(new JWTLoginFilter(authenticationManager()))
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
                 .exceptionHandling().authenticationEntryPoint(new JWTAuthenticationEntryPoint());
+
+        authorizeConfigManager.config(http.authorizeRequests());
     }
 
 

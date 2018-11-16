@@ -14,6 +14,7 @@ public interface NewsDao {
     int insert(News news);
 
     List<News> selectTeachers();
+    News selectTeachersById(int id);
 
     int delete(int id);
 

@@ -32,6 +32,12 @@ public class TeacherController {
                     int pageSize) {
         return teacherService.findAllTeacher(pageNum, pageSize);
     }
+    @GetMapping(value = "/selectTeacherById")
+    public Object selectTeacherById(
+            @RequestParam(name = "id", required = false, defaultValue = "1")
+                    int id) {
+        return teacherService.selectTeacherById(id);
+    }
 
     @GetMapping(value = "/delete")
     public int deleteTeacher(@RequestParam(name = "id",required = false) Integer id){

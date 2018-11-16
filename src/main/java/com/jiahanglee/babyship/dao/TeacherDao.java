@@ -13,6 +13,7 @@ import java.util.List;
         int insert(Teacher teacher);
 
         List<Teacher> selectTeachers();
+        Teacher selectTeachersById(int id);
 
         int delete(int id);
 

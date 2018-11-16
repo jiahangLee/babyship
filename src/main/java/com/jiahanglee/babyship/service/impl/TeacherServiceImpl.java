@@ -30,6 +30,11 @@ public class TeacherServiceImpl implements TeacherService{
     }
 
     @Override
+    public Teacher selectTeacherById(int id) {
+        return teacherDao.selectTeachersById(id);
+    }
+
+    @Override
     public int deleteTeacher(Integer id) {
         return teacherDao.delete(id);
     }

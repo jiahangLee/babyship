@@ -39,6 +39,13 @@ public class NewsController {
     ) {
         return newsService.findAllTeacher(pageNum, pageSize);
     }
+    @GetMapping(value = "/selectNewsById")
+    public Object selectNewsById(
+            @RequestParam(name = "id", required = false, defaultValue = "1")
+                    int id
+    ) {
+        return newsService.selectTeachersById(id);
+    }
 
     @GetMapping(value = "/deleteNews")
     public int deleteTeacher(@RequestParam(name = "id",required = false) Integer id){

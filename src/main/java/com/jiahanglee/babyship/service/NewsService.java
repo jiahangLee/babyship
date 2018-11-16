@@ -9,6 +9,7 @@ public interface NewsService {
 
   PageInfo<News> findAllTeacher(int pageNum, int pageSize);
 
+  News selectTeachersById(int id);
   int deleteTeacher(Integer id);
 
   void update(News teacher);

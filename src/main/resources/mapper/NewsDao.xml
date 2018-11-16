@@ -34,6 +34,14 @@
 		ORDER BY id
 	</select>
 
+    <select id="selectTeachersById" resultType="com.jiahanglee.babyship.entity.News">
+        SELECT
+        id,name,url,description,editor,create_time createTime,update_time updateTime
+        FROM
+        <include refid="BASE_TABLE"/>
+        where id = #{id}
+    </select>
+
 	<delete id="delete" parameterType="Integer">
 		delete From news WHERE id = #{id}
 	</delete>

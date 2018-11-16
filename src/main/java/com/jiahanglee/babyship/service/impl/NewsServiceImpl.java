@@ -30,6 +30,11 @@ public class NewsServiceImpl implements NewsService{
     }
 
     @Override
+    public News selectTeachersById(int id) {
+        return teacherDao.selectTeachersById(id);
+    }
+
+    @Override
     public int deleteTeacher(Integer id) {
         return teacherDao.delete(id);
     }

@@ -9,6 +9,8 @@ import com.jiahanglee.babyship.entity.Teacher;
 
       PageInfo<Teacher> findAllTeacher(int pageNum,int pageSize);
 
+      Teacher selectTeacherById(int id);
+
       int deleteTeacher(Integer id);
 
       void update(Teacher teacher);

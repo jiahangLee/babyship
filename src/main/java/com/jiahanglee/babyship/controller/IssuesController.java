@@ -29,11 +29,8 @@ public class IssuesController {
             @RequestParam(name = "pageNum", required = false, defaultValue = "1")
                     int pageNum,
             @RequestParam(name = "pageSize", required = false, defaultValue = "10")
-                    int pageSize,
-            HttpServletResponse response,HttpServletRequest request
+                    int pageSize
     ) {
-        response.setHeader("Access-Control-Allow-Origin", systemParams.getWeb_url());
-        response.setHeader("Access-Control-Allow-Credentials", "true");
         return issuesService.findAllTeacher(pageNum, pageSize);
     }
 

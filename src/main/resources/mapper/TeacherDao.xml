@@ -33,7 +33,13 @@
 		<include refid="BASE_TABLE"/>
 		ORDER BY id
 	</select>
-
+	<select id="selectTeachersById" resultType="com.jiahanglee.babyship.entity.Teacher">
+		SELECT
+		<include refid="BASE_COLUMN"/>
+		FROM
+		<include refid="BASE_TABLE"/>
+		where id = #{id}
+	</select>
 	<delete id="delete" parameterType="Integer">
 		delete From teacher WHERE id = #{id}
 	</delete>

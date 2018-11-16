@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 
 
-@Component
+//@Component
 @Order(Integer.MAX_VALUE)
 public class SearchAuthorizeConfigProvider implements AuthorizeConfigProvider{
 

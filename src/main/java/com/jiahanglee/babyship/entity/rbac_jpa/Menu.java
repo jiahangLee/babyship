@@ -42,6 +42,7 @@ public class Menu {
     private int parentId;
     private Integer level;
     private Integer status;
+    private String url;
 
     @CreationTimestamp
     @Column(name = "create_time",columnDefinition="DATETIME COMMENT '添加时间'")
@@ -122,6 +123,14 @@ public class Menu {
         this.status = status;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     @Override
     public String toString() {
         return "Menu{" +
@@ -132,6 +141,7 @@ public class Menu {
                 ", parentId=" + parentId +
                 ", level=" + level +
                 ", status=" + status +
+                ", url='" + url + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
                 '}';

@@ -97,7 +97,20 @@ public class MenuController {
         List<TreeNode<Menu>> forest = convertTree.getForest(menuTree, "id", "parentId");
         return forest;
     }
-    //
+//    //获取url做RBAC接口权限控制
+//    @GetMapping(value = "/selectUrlsByRole")
+//    public List<String> getUrls(Integer role) {
+//        //获取所有菜单
+//        List<Menu> allMenus = menuService.findAllMenu();
+//        //获取该role下所有menus
+//        List<Menu> aboutMenus = menuService.selectByRole(role);
+//        List<String> urls = new ArrayList<>();
+//        for (Menu menu : aboutMenus) {
+//            urls.add(menu.getUrl());
+//        }
+//
+//        return null;
+//    }
     /**
      * 初始化菜单数据
      * @param aboutMenus

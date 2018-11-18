@@ -65,6 +65,10 @@
         cn_name cnName
         FROM user
         where name = #{name}
+    </select><select id="selectUserName"  resultType="String">
+        SELECT
+        name
+        FROM user
     </select>
     <delete id="delete" parameterType="Integer">
         delete From user WHERE id = #{id}

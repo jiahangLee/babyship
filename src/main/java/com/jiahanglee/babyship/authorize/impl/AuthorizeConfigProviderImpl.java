@@ -11,8 +11,17 @@ public class AuthorizeConfigProviderImpl implements com.jiahanglee.babyship.auth
     @Override
     public void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config) {
         config.antMatchers("/hello2").authenticated()
+                .antMatchers("/allRoles").permitAll()
                 // 需要角色为ADMIN才能删除该资源
-                .antMatchers("/hello").permitAll();
+                .antMatchers("/hello").permitAll()
+                .antMatchers("/allNews").permitAll()
+                .antMatchers("/issues").permitAll()
+                .antMatchers("/all").permitAll()
+                .antMatchers("/download").permitAll()
+                .antMatchers("/allIssues").permitAll()
+                .antMatchers("/designRole").permitAll()
+                .antMatchers("/selectMenusByRole").permitAll();
+
                 // 其他都放行了
 
 

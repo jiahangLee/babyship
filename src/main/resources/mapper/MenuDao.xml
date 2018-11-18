@@ -51,7 +51,7 @@
     </select>
     <select id="selectByRole" parameterType="Integer" resultType="com.jiahanglee.babyship.entity.rbac_jpa.Menu">
         SELECT
-        menu.id,menu.name,menu.description,parent_id parentId,key_id keyId,level,status
+        menu.id,menu.name,menu.description,menu.url,parent_id parentId,key_id keyId,level,status
         FROM
         menu,role_privilege,privilege_menu
         WHERE menu.id = privilege_menu.menu_id and role_privilege.privilege_id = privilege_menu.privilege_id and role_privilege.role_id = #{role}

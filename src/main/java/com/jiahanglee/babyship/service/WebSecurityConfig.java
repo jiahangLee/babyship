@@ -42,13 +42,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.cors().and().csrf().disable()
-                //跳转登录页面
-                .formLogin()
-                //自定义登录页面
-                //.loginPage("login.html")
-                .and()
-                .logout()
-                .and()
+//                //跳转登录页面
+//                .formLogin()
+//                //自定义登录页面
+//                //.loginPage("login.html")
+//                .and()
+//                .logout()
+//                .and()
                 .addFilter(new JWTLoginFilter(authenticationManager()))
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
                 .exceptionHandling().authenticationEntryPoint(new JWTAuthenticationEntryPoint());

@@ -67,9 +67,7 @@ public class RbacServiceImpl implements RbacService {
                     aboutMenus+"::::"+urls
             );
             for (String url : urls) {
-                System.out.println(
-                        "匹配url资源"+url+":"+request.getRequestURI().toString()
-                );
+                //这里的toString（）不能省略，因为url中的‘+’
                 if (antPathMatcher.match(url,request.getRequestURI().toString())) {
                     System.out.println(
                             "匹配url资源成功"

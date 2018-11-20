@@ -83,7 +83,13 @@ public class RoleServiceImpl implements RoleService{
     }
 
     @Override
+    @Transactional(rollbackFor=Exception.class)
     public int deleteRole(Integer id) {
+        //通过roleId获取privilegeId
+        int privilegeId = rolePrivilegeDao.selectByRole(id);
+        //修改privilege_menu表
+        privilegeMenuDao.delete(privilegeId);
+        rolePrivilegeDao.delete(id);
         return roleDao.delete(id);
     }
 

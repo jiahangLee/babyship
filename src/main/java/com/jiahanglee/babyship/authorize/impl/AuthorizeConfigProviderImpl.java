@@ -27,6 +27,7 @@ public class AuthorizeConfigProviderImpl implements com.jiahanglee.babyship.auth
                 .antMatchers("/add").permitAll()
                 .antMatchers("/update").permitAll()
                 .antMatchers("/delete").permitAll()
+                .antMatchers("/getTeachers").permitAll()
 
                 .antMatchers("/upload").permitAll()
                 .antMatchers("/uploadplus").permitAll()

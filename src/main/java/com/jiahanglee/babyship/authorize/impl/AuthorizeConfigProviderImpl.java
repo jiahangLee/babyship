@@ -18,6 +18,7 @@ public class AuthorizeConfigProviderImpl implements com.jiahanglee.babyship.auth
                 .antMatchers("/selectMenusByRole").permitAll()
                 //news
                 .antMatchers("/*News").permitAll()
+                .antMatchers("/selectNewsById").permitAll()
                 //issues
                 .antMatchers("/*issues").permitAll()
                 .antMatchers("/*Issues").permitAll()
@@ -28,9 +29,14 @@ public class AuthorizeConfigProviderImpl implements com.jiahanglee.babyship.auth
                 .antMatchers("/update").permitAll()
                 .antMatchers("/delete").permitAll()
                 .antMatchers("/getTeachers").permitAll()
+                .antMatchers("//selectTeacherById").permitAll()
 
                 .antMatchers("/upload").permitAll()
                 .antMatchers("/uploadplus").permitAll()
-                .antMatchers("/download").permitAll();
+                .antMatchers("/download").permitAll()
+                .antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**","/swagger-resources/configuration/ui","/swagge‌​r-ui.html").permitAll()
+
+
+        ;
     }
 }

@@ -4,6 +4,9 @@ import com.jiahanglee.babyship.entity.News;
 import com.jiahanglee.babyship.service.NewsService;
 import com.jiahanglee.babyship.service.TeacherService;
 import com.jiahanglee.babyship.theone.SystemParams;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +23,7 @@ import java.io.IOException;
 @Controller
 @CrossOrigin
 @RestController
+@Api(value="新闻", tags="新闻tag")
 public class NewsController {
     @Autowired
     private NewsService newsService;
@@ -40,8 +44,9 @@ public class NewsController {
         return newsService.findAllTeacher(pageNum, pageSize);
     }
     @GetMapping(value = "/selectNewsById")
-    public Object selectNewsById(
-            @RequestParam(name = "id", required = false, defaultValue = "1")
+    @ApiOperation(value="获取新闻列表value", notes="获取新闻列表notes")
+    public Object selectNewsById(@ApiParam(value = "新闻id")
+            @RequestParam( name = "id", required = false, defaultValue = "1")
                     int id
     ) {
         return newsService.selectTeachersById(id);

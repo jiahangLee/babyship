@@ -1,5 +1,7 @@
 package com.jiahanglee.babyship.entity;
 
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiParam;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -35,6 +37,7 @@ import java.sql.Timestamp;
 public class News {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @ApiModelProperty(value = "新闻Id")
     private Integer id;
     private String name;
     private String url;
